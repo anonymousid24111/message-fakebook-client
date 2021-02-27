@@ -1,0 +1,48 @@
+/get_list_conversations
+/set_theme_conversation
+/set_emoji_conversation
+/get_conversation
+/detete-conversation
+
+/send_message
+/receive_message
+/delete_message
+/edit_message
+
+/set_active_status
+/set_notification_sounds
+/set_block
+/get_list_blocks
+/get_list_friends
+
+/search_conversation
+/search_friend
+/report_conversation
+
+/get_file_conversation
+/get_media_conversation
+
+bonus
+/edit_nickname
+/set_unread
+/mute_conversation
+/view_profile
+/audio_call
+/video_call
+/hide_conversation
+
+/react
+
+todo
+-   menu right, dropdown, enimations, show images
+-   show react, image, video, link, gif, video_call, 
+-   unread, sent, pending, unnotification
+-   active
+-   loading
+-   no data
+-   react message
+-   reply
+-   right click message 
+-   search box conversation, message
+-   settings theme
+

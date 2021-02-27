@@ -1,246 +1,57 @@
-import './App.css';
-import React, { useRef, useEffect } from 'react'
-import logo from './logo.svg'
-
-
-function App() {
-  const divRef = useRef(null);
-
-  useEffect(() => {
-    divRef.current.scrollTop = divRef.current.scrollHeight;
-  });
-
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import { ProvideAuth } from './hooks/useAuth'
+// import routes from './routes';
+// import PrivateRoute from './components/PrivateRoute';
+import Login from "pages/Login";
+import Signup from "pages/Signup";
+// import AuthRoute from "components/AuthRoute";
+import HomePage from "pages/Home";
+import Message from "pages/Message";
+import Profile from "pages/Profile";
+import Friend from "pages/Friend";
+import NotFound from "pages/NotFound";
+import MessageRedirect from "pages/MessageRedirect";
+import "App.css"
+import Landing from "pages/Landing";
+import { ProvideSocket } from "hooks/useSocket";
+import { API_URL } from "commons/constants";
+import { io } from "socket.io-client";
+export default function App() {
   return (
-    <div className="container-full">
-      <div className="container-left">
-        <div className="header-left" >
-          <img src={logo} className="header-left__image" />
-          <span className="header-left__headline">Chats</span>
-          <button className="header-left__button">1</button>
-          <button className="header-left__button">1</button>
-          <button className="header-left__button">1</button>
-        </div>
-        <div className="search-box">
-          <input type="text" className="search-box__input" />
-        </div>
-        <div className="list-conversation">
-          <div className="conversation-block">
-            <img src={logo} alt="avatar-friend" className="conversation-block__image" />
-            <div className="conversation-block-content">
-              <span className="conversation-block-content__headline">fsdawejdioawejiigweajoiawhigjewoifhauihg</span>
-              <div className="conversation-block-content__body">
-                <div className="conversation-block-content__message">kajewfaewufawoiegoiawheoifhawoi</div>
-                <span>-</span>
-                <span>1m</span>
-              </div>
-            </div>
-            <icon className="conversation-block__icon"></icon>
-          </div>
-          <div className="conversation-block">
-            <div className="conversation-block__image" >
-              <img src={logo} alt="avatar-friend" className="conversation-block__avatar" />
-              <span className="conversation-block__active"></span>
-            </div>
-            <div className="conversation-block-content">
-              <span className="conversation-block-content__headline">f</span>
-              <div className="conversation-block-content__body">
-                <div className="conversation-block-content__message">kajewfaewufawoiegoiawheoifhawoi</div>
-                <span>-</span>
-                <span>1m</span>
-              </div>
-            </div>
-            <icon className="conversation-block__icon"></icon>
-          </div>
-          <div className="conversation-block">
-            <img src={logo} alt="avatar-friend" className="conversation-block__image" />
-            <div className="conversation-block-content">
-              <span className="conversation-block-content__headline">fsdawejdioawejiigweajoiawhigjewoifhauihg</span>
-              <div className="conversation-block-content__body">
-                <div className="conversation-block-content__message">kajewfaewufawoiegoiawheoifhawoi</div>
-                <span>-</span>
-                <span>1m</span>
-              </div>
-            </div>
-            <icon className="conversation-block__icon"></icon>
-          </div>
-          <div className="conversation-block">
-            <img src={logo} alt="avatar-friend" className="conversation-block__image" />
-            <div className="conversation-block-content">
-              <span className="conversation-block-content__headline">fsdawejdioawejiigweajoiawhigjewoifhauihg</span>
-              <div className="conversation-block-content__body">
-                <div className="conversation-block-content__message">kajewfaewufawoiegoiawheoifhawoi</div>
-                <span>-</span>
-                <span>1m</span>
-              </div>
-            </div>
-            <icon className="conversation-block__icon"></icon>
-          </div>
-          <div className="conversation-block">
-            <img src={logo} alt="avatar-friend" className="conversation-block__image" />
-            <div className="conversation-block-content">
-              <span className="conversation-block-content__headline">fsdawejdioawejiigweajoiawhigjewoifhauihg</span>
-              <div className="conversation-block-content__body">
-                <div className="conversation-block-content__message">kajewfaewufawoiegoiawheoifhawoi</div>
-                <span>-</span>
-                <span>1m</span>
-              </div>
-            </div>
-            <icon className="conversation-block__icon"></icon>
-          </div>
-          <div className="conversation-block">
-            <img src={logo} alt="avatar-friend" className="conversation-block__image" />
-            <div className="conversation-block-content">
-              <span className="conversation-block-content__headline">fsdawejdioawejiigweajoiawhigjewoifhauihg</span>
-              <div className="conversation-block-content__body">
-                <div className="conversation-block-content__message">kajewfaewufawoiegoiawheoifhawoi</div>
-                <span>-</span>
-                <span>1m</span>
-              </div>
-            </div>
-            <icon className="conversation-block__icon"></icon>
-          </div>
-          <div className="conversation-block">
-            <img src={logo} alt="avatar-friend" className="conversation-block__image" />
-            <div className="conversation-block-content">
-              <span className="conversation-block-content__headline">fsdawejdioawejiigweajoiawhigjewoifhauihg</span>
-              <div className="conversation-block-content__body">
-                <div className="conversation-block-content__message">kajewfaewufawoiegoiawheoifhawoi</div>
-                <span>-</span>
-                <span>1m</span>
-              </div>
-            </div>
-            <icon className="conversation-block__icon"></icon>
-          </div>
-          <div className="conversation-block">
-            <img src={logo} alt="avatar-friend" className="conversation-block__image" />
-            <div className="conversation-block-content">
-              <span className="conversation-block-content__headline">fsdawejdioawejiigweajoiawhigjewoifhauihg</span>
-              <div className="conversation-block-content__body">
-                <div className="conversation-block-content__message">kajewfaewufawoiegoiawheoifhawoi</div>
-                <span>-</span>
-                <span>1m</span>
-              </div>
-            </div>
-            <icon className="conversation-block__icon"></icon>
-          </div>
+    <ProvideSocket>
+      <ProvideAuth>
+        <Router>
+          <Switch>
+            <Route path="/" exact component={HomePage} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/message" exact component={MessageRedirect} />
+            <Route path="/message/t/" component={Message} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/friend" component={Friend} />
+            <Route path="/landing" component={Landing} />
+            <Route path='*' component={NotFound} />
 
-        </div>
-      </div>
-      <div className="container-right">
-        <div className="header-left">
-          <img src={logo} className="header-left__image" />
-          <div className="header-left__headline">
-            <div className="header-left__headline--title">Title</div>
-            <div className="conversation-block-content__body">status</div>
-          </div>
-          <button className="header-left__button">1</button>
-          <button className="header-left__button">1</button>
-          <button className="header-left__button">1</button>
-        </div>
-        <div className="list-chat" ref={divRef}>
-          <div className="list-chat__time">Jan 17, 2021, 7:33 AM</div>
-          <div className="list-chat__left">
-            <div className="item-chat__left">
-              <div className="list-chat__avatar">
-                <img src={logo} alt="avatar-friend" className="item-chat__avatar" />
-              </div>
+            {/* {routes.map((route, index) => {
+            return <Route path={route.path} key={index} component={route.component} />
+          })}
+          <AuthRoute path="/login" exact ><Login /></AuthRoute>
+          <AuthRoute path="/signup" exact ><Signup /></AuthRoute> */}
+            {/* {
+            routes.publicRoutes.map((route, index) => {
+              return <Route path={route?.path} exact component={route.component} key={index} />
+            })
+          } */}
+          </Switch>
+        </Router>
+        {/* <div className="absolute bottom-0 left-0 bg-gray-700 w-80 h-20 rounded-xl m-5">Toast</div> */}
+      </ProvideAuth>
+    </ProvideSocket>
 
-              <div className="list-chat__message">mesajkfje kaejfww mawekf jjaiwejfoiawjefioj jaewifjiwaeojfoij</div>
-            </div>
-            <div className="list-chat__time">Jan 17, 2021, 7:33 AM</div>
-            <div className="item-chat__left">
-              <div className="list-chat__avatar">
-                <img src={logo} alt="avatar-friend" className="item-chat__avatar" />
-              </div>
-
-              <div className="list-chat__message">mesajkfje kaejfww mawekf jjaiwejfoiawjefioj jaewifjiwaeojfoij</div>
-            </div>
-            <div className="list-chat__time">Jan 17, 2021, 7:33 AM</div>
-            <div className="item-chat__right">
-              <div className="list-chat__avatar">
-                <img src={logo} alt="avatar-friend" className="item-chat__avatar" />
-              </div>
-
-              <div className="list-chat__message">
-                <div className="item-chat__message">
-                  hihih
-                </div>
-                <div className="item-chat__message">
-                  hhaha
-                </div>
-              </div>
-            </div>
-            <div className="list-chat__time">Jan 17, 2021, 7:33 AM</div>
-            <div className="item-chat__right">
-              <div className="list-chat__avatar">
-                <img src={logo} alt="avatar-friend" className="item-chat__avatar" />
-              </div>
-
-              <div className="list-chat__message">
-                <div className="item-chat__message">
-                  hihih
-                </div>
-                <div className="item-chat__message">
-                  hhaha
-                </div>
-              </div>
-            </div>
-            <div className="list-chat__time">Jan 17, 2021, 7:33 AM</div>
-            <div className="item-chat__right">
-              <div className="list-chat__avatar">
-                <img src={logo} alt="avatar-friend" className="item-chat__avatar" />
-              </div>
-
-              <div className="list-chat__message">
-                <div className="item-chat__message">
-                  hihih
-                </div>
-                <div className="item-chat__message">
-                  hhaha
-                </div>
-              </div>
-            </div>
-            <div className="list-chat__time">Jan 17, 2021, 7:33 AM</div>
-            <div className="item-chat__right">
-              <div className="list-chat__avatar">
-                <img src={logo} alt="avatar-friend" className="item-chat__avatar" />
-              </div>
-
-              <div className="list-chat__message">
-                <div className="item-chat__message">
-                  hihih
-                </div>
-                <div className="item-chat__message">
-                  hhaha
-                </div>
-              </div>
-            </div>
-            <div className="list-chat__time">Jan 17, 2021, 7:33 AM</div>
-            <div className="item-chat__left">
-              <div className="list-chat__avatar">
-                <img src={logo} alt="avatar-friend" className="item-chat__avatar" />
-              </div>
-
-              <div className="list-chat__message">
-                <div className="item-chat__message">
-                  hihih
-                </div>
-                <div className="item-chat__message">
-                  hhaha
-                </div>
-              </div>
-            </div>
-            <div className="list-chat__time">Jan 17, 2021, 7:33 AM</div>
-          </div>
-        </div>
-        <div className="footer-right">
-          <img src={logo} alt="add" className="footer-right__icon" />
-          <input type="text" name="message" className="footer-right__input search-box__input" />
-          <img src={logo} alt="react" className="footer-right__icon" />
-        </div>
-      </div>
-    </div>
   );
 }
-
-export default App;
