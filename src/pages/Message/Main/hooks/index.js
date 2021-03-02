@@ -1,15 +1,12 @@
-import React, { useContext, createContext, useState, useEffect, useRef } from "react";
+import React, { useContext, createContext, useState, useEffect } from "react";
 
 import { useParams } from 'react-router-dom';
 
-import { JOIN, SEND_MESSAGE } from 'commons/socketEvents'
+import { JOIN, OUT_ROOM, SEND_MESSAGE } from 'commons/socketEvents'
 import { useAuth } from 'hooks/useAuth';
-import io from "socket.io-client";
 
 import callApiHttp from 'functions/callApiHttp';
 import { RECEIVE_MESSAGE } from 'commons/socketEvents'
-import { useSocket } from "hooks/useSocket";
-import { API_URL } from "commons/constants";
 
 
 
@@ -31,36 +28,42 @@ function useMain() {
 function useProvideMain() {
     const [show, setShow] = useState(false)
     const { id } = useParams()
-    // const { socketRef } = useSocket()
-    // let socket = socketRef.current
-
-    const user = localStorage.getItem("user_id")
+    const { socket, user } = useAuth()
     const [conversation, setConversation] = useState()
-    let userInfoRef = useRef()
-    let userInfo = userInfoRef.current
-    
-    const handleSubmitSendMessage = (e) => {
-        // console.log(object)
-        // socket.emit(SEND_MESSAGE, {
-        //     sender: user,
-        //     receiver: id,
-        //     message: {
-        //         kind: e ? "text" : "react",
-        //         content: e
-        //     },
-        //     conversationId: conversation?._id || ""
-        // })
+    const [userInfo, setUserInfo] = useState()
 
-        setConversation(x => ({
-            ...x, messages: [...x.messages, {
-                kind: "text",
+
+    const handleSubmitSendMessage = (e, kind = "text") => {
+        let now = Date.now()
+        socket.emit(SEND_MESSAGE, {
+            sender: user,
+            receiver: id,
+            message: {
+                kind,
+                content: e
+            },
+            conversationId: conversation?._id || ""
+        })
+
+        
+
+        setConversation(x => x ? ({
+            ...x, messages: [...x?.messages, {
+                kind,
                 content: e,
-                sender: user
+                sender: user,
+                created: now
+            }]
+        }) : ({
+            members: [id, user],
+            messages: [{
+                kind,
+                content: e,
+                sender: user,
+                created: now
             }]
         }))
-        // setMessage("")
     }
-    console.log("render effect body main ", user, conversation, userInfo)
 
     useEffect(() => {
         let isSubscribed = true;
@@ -72,13 +75,11 @@ function useProvideMain() {
                 })
                 if (data.code === 1000) {
                     if (data.data) {
-                        console.log("get conv", data.data)
                         const { member, conversations } = data.data
-                        !userInfoRef.current && isSubscribed && (userInfoRef.current = member)
+                        isSubscribed && (setUserInfo(member))
                         isSubscribed && setConversation(conversations)
                     } else {
                         isSubscribed && setConversation({})
-                        console.log("lost data", data)
                     }
 
                 } else {
@@ -94,18 +95,18 @@ function useProvideMain() {
 
 
     useEffect(() => {
-        // conversation&&socketRef.current.emit(JOIN,"hihi")
-        // console.log("socket", socket, id, conversation)
-        // if (!socket || !id || !conversation) return
-        // socket.emit(JOIN, "aaa")
-        // socket.on(RECEIVE_MESSAGE, data => {
-        //     console.log("id current: ", id, data)
-        //     data.sender === id && setConversation(x => ({ ...x, messages: [...x.messages, data] }))
-        // })
+        if (!conversation) return
+        const { _id } = conversation
+        if (!_id) return
+        socket.emit(JOIN, _id)
+        socket.on(RECEIVE_MESSAGE, data => {
+            setConversation(x => ({ ...x, messages: [...x.messages, data] }))
+        })
         return () => {
-            // socket && socket.disconnect()
+            socket && socket.off(RECEIVE_MESSAGE)
+            _id && socket && socket.emit(OUT_ROOM, _id)
         }
-    }, [id, conversation])
+    }, [socket, conversation])
 
 
 

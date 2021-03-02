@@ -1,8 +1,9 @@
+import { toTimeFacebook } from 'functions/formatTime'
 import React from 'react'
 
-const MessageTime = () => {
+const MessageTime = ({time}) => {
     return (
-        <div className="list-chat__time">Jan 17, 2021, 7:33 AM</div>
+        <div className="list-chat__time">{toTimeFacebook(time)}</div>
     )
 }
 

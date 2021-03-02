@@ -20,6 +20,12 @@
 .fb-bg-main{
     background-color: #2d88ff;
 }
+.fb-cl-main{
+    color: #2d88ff;
+}.
+.fb-cl-sec{
+    color: var(--color-secondary);
+}
 .fb-bg-active{
     color: #2d88ff;
 }
@@ -195,8 +201,6 @@ body {
     color: var(--color-secondary);
     white-space: nowrap;
     display: inline;
-    /* width: 185px; */
-    /* border: 1px solid #000000; */
     overflow: hidden;
     text-overflow: ellipsis;
 }

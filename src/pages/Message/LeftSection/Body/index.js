@@ -4,9 +4,8 @@ import { ProvideBody, useBody } from './hooks';
 
 import ListConversations from './ListConversations';
 import ListSearchUsers from './ListSearchUsers.js';
-const BodyImpl = () => {
-    console.log("render body left")
 
+const BodyImpl = () => {
     const ref = useRef(null);
     const refInput = useRef(null);
     const refTimeout = useRef(null);
@@ -14,6 +13,7 @@ const BodyImpl = () => {
     const [searching, setSearching] = useState(false)
     const [keyword, setKeyword] = useState("")
 
+    
     const { fetchUsers } = useBody()
 
     useEffect(() => {
@@ -34,7 +34,6 @@ const BodyImpl = () => {
         if (refTimeout.current) clearTimeout(refTimeout.current)
         refTimeout.current = setTimeout(() => fetchUsers(e.target.value), 600)
     }
-
 
     return (
         <>

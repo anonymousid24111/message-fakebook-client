@@ -9,7 +9,8 @@ function Login() {
     let location = useLocation();
 
     let { from } = location.state || { from: { pathname: "/" } };
-    let login = async () => {
+    let login = async (e) => {
+        e.preventDefault()
         try {
             const res = await callApiHttp({
                 method: 'POST',
@@ -38,7 +39,7 @@ function Login() {
     const [error, setError] = useState('')
     return (
         <div className="w-screen h-screen flex items-center justify-center bg-black" >
-            <form className="w-96 fb-bg-dark rounded-xl p-7 space-y-3">
+            <form onSubmit={login} className="w-96 fb-bg-dark rounded-xl p-7 space-y-3">
                 <div><label className="font-bold text-lg " htmlFor="email">Email:</label></div>
                 <div >
                     <input
@@ -57,9 +58,9 @@ function Login() {
                         placeholde="password" />
                 </div>
                 <div className="flex justify-end" >
-                     <button className="fb-bg-main px-3 py-2 rounded-full" onClick={login}>Log in</button>
+                    <button className="fb-bg-main px-3 py-2 rounded-full">Log in</button>
                 </div>
-               
+
             </form>
 
             {error && <div>Error: {error}</div>}

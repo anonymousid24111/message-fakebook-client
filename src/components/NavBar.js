@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import LogoutButton from './LogoutButton'
 // import { useAuth } from '../hooks/useAuth'
 
 const NavBar = ({ routes = [] }) => {
@@ -17,6 +18,7 @@ const NavBar = ({ routes = [] }) => {
                     {route?.name}
                 </NavLink>)
             })}
+            <LogoutButton />
         </div>
     )
 }

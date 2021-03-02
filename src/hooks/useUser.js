@@ -29,7 +29,6 @@ function useProvideUser() {
                 method: 'GET'
             })
             const { data } = res
-            console.log( data)
             if (data.code === 1000) {
                 setUserInfo(data.data)
                 localStorage.setItem('user_info', JSON.stringify(data.data))

@@ -1,42 +1,42 @@
-import { API_URL } from "commons/constants";
-import { JOIN } from "commons/socketEvents";
-import React, { useContext, createContext, useEffect, useRef } from "react";
-import io from "socket.io-client";
+// import { API_URL } from "commons/constants";
+// import { JOIN } from "commons/socketEvents";
+// import React, { useContext, createContext, useEffect, useRef } from "react";
+// import io from "socket.io-client";
 
-const socketContext = createContext();
+// const socketContext = createContext();
 
-function ProvideSocket({ children }) {
-    const socket = useProvideSocket();
-    return (
-        <socketContext.Provider value={socket}>
-            {children}
-        </socketContext.Provider>
-    );
-}
+// function ProvideSocket({ children }) {
+//     const socket = useProvideSocket();
+//     return (
+//         <socketContext.Provider value={socket}>
+//             {children}
+//         </socketContext.Provider>
+//     );
+// }
 
-function useSocket() {
-    return useContext(socketContext);
-}
+// function useSocket() {
+//     return useContext(socketContext);
+// }
 
-function useProvideSocket() {
+// function useProvideSocket() {
     
-    let socketRef = useRef()
+//     let socketRef = useRef()
 
-    useEffect(() => {
-        !socketRef.current&&( socketRef.current = io(API_URL))
-        return () => {
-            socketRef.current&& socketRef.current.disconnect()
-        }
-    })
-    console.log("curren", socketRef)
+//     useEffect(() => {
+//         socketRef.current = io(API_URL)
+//         return () => {
+//             socketRef.current&& socketRef.current.disconnect()
+//         }
+//     })
+//     console.log("curren", socketRef)
 
-    return {
-        socketRef
-    };
-}
+//     return {
+//         socketRef
+//     };
+// }
 
-export {
-    ProvideSocket,
-    useSocket,
-    useProvideSocket,
-}
+// export {
+//     ProvideSocket,
+//     useSocket,
+//     useProvideSocket,
+// }

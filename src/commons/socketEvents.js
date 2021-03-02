@@ -1,3 +1,5 @@
 export const JOIN = 'JOIN'
 export const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE'
 export const SEND_MESSAGE = 'SEND_MESSAGE'
+export const OUT_ROOM = 'OUT_ROOM'
+export const NEW_CONVERSATION = 'NEW_CONVERSATION'

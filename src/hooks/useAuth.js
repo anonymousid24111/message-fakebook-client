@@ -1,9 +1,8 @@
-import { API_URL } from "commons/constants";
-import { JOIN } from "commons/socketEvents";
-import React, { useContext, createContext, useState, useEffect, useRef } from "react";
-import io from "socket.io-client";
-import { useSocket } from "./useSocket";
+import React, { useContext, createContext, useState, useEffect } from "react";
 // import { useSocket } from "./useSocket";
+import { JOIN } from 'commons/socketEvents'
+import { API_URL } from "commons/constants";
+import io from "socket.io-client";
 
 const authContext = createContext();
 
@@ -22,15 +21,22 @@ function useAuth() {
 
 function useProvideAuth() {
     const [user, setUser] = useState(localStorage.getItem('user_id'));
-    // const [socket, setSocket] = useState()
-    const { socketRef } = useSocket()
+    const [socket, setSocket] = useState()
     useEffect(() => {
-        console.log("emit",socketRef)
-        socketRef.current&&socketRef.current.emit(JOIN, "user")
-    })
+        user && socket && socket.emit(JOIN, user)
+        return () => {
+            socket && socket.disconnect()
+        }
+    }, [user, socket])
+
+    useEffect(() => {
+        setSocket(io(API_URL))
+    }, [])
+
     return {
         user,
-        setUser
+        setUser,
+        socket
     };
 }
 
