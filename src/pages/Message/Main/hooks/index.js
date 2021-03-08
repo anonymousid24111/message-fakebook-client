@@ -2,13 +2,11 @@ import React, { useContext, createContext, useState, useEffect } from "react";
 
 import { useParams } from 'react-router-dom';
 
-import { JOIN, OUT_ROOM, SEND_MESSAGE } from 'commons/socketEvents'
+import { JOIN, OUT_ROOM, SEND_MESSAGE, TYPING } from 'commons/socketEvents'
 import { useAuth } from 'hooks/useAuth';
 
 import callApiHttp from 'functions/callApiHttp';
 import { RECEIVE_MESSAGE } from 'commons/socketEvents'
-
-
 
 const mainContext = createContext();
 
@@ -31,6 +29,18 @@ function useProvideMain() {
     const { socket, user } = useAuth()
     const [conversation, setConversation] = useState()
     const [userInfo, setUserInfo] = useState()
+    const [typing, setTyping] = useState(false)
+    const [changing, setChanging] = useState(false)
+    console.log('typing', typing)
+
+    const handleTypingHook = (flag) => {
+        socket && socket.emit(TYPING, {
+            sender: user,
+            conversationId: conversation?._id,
+            typing: flag,
+            kind: "typing"
+        })
+    }
 
 
     const handleSubmitSendMessage = (e, kind = "text") => {
@@ -44,8 +54,6 @@ function useProvideMain() {
             },
             conversationId: conversation?._id || ""
         })
-
-        
 
         setConversation(x => x ? ({
             ...x, messages: [...x?.messages, {
@@ -93,29 +101,39 @@ function useProvideMain() {
         return () => (isSubscribed = false)
     }, [id])
 
-
+    console.log("hook g")
     useEffect(() => {
+        console.log("effect g", socket, conversation)
         if (!conversation) return
         const { _id } = conversation
         if (!_id) return
         socket.emit(JOIN, _id)
         socket.on(RECEIVE_MESSAGE, data => {
+            console.log('data ', data)
             setConversation(x => ({ ...x, messages: [...x.messages, data] }))
         })
+        socket.on(TYPING, data => {
+            console.log('dataaaaaa', data)
+            setTyping(data.typing)
+        })
         return () => {
-            socket && socket.off(RECEIVE_MESSAGE)
+            console.log("effect g", socket, conversation)
+            socket && socket.off(RECEIVE_MESSAGE) && socket.off(TYPING)
             _id && socket && socket.emit(OUT_ROOM, _id)
         }
-    }, [socket, conversation])
-
-
+    }, [socket, conversation, typing])
 
     return {
         show,
         setShow,
         conversation,
         handleSubmitSendMessage,
-        userInfo
+        userInfo,
+        typing,
+        setTyping,
+        handleTypingHook,
+        changing,
+        setChanging
         // message,
         // setMessage
     };

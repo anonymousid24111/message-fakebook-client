@@ -5,7 +5,7 @@ import AvatarBlock16 from 'components/AvatarBlock16'
 import LikeFacebook from 'components/LikeFacebook'
 
 const ConversationElement = ({ members = {}, conversation = {}, conversationName = "", firstMessage = {}, conversationId = "" }) => {
-    let is_read, isMe = members?.username || members?.email;
+    let is_read, isMe = "";
     if (firstMessage?.sender === localStorage.getItem("user_id")) {
         is_read = true
         isMe = "You: "
@@ -33,7 +33,7 @@ const ConversationElement = ({ members = {}, conversation = {}, conversationName
             let json = JSON.parse(firstMessage.content)
 
             return <div className="conversation-block-content__message">
-                {<i>sent some {json?.length>1?json?.length+" photos.":"a photo."}</i>}
+                {<i>sent some {json?.length > 1 ? json?.length + " photos." : "a photo."}</i>}
             </div>
         }
         else {
@@ -52,9 +52,9 @@ const ConversationElement = ({ members = {}, conversation = {}, conversationName
                 <div className="conversation-block-content">
                     <span className="conversation-block-content__headline">{conversationName || 'null'}</span>
                     <div className="conversation-block-content__body">
-                        {isMe}&nbsp;
+                        {isMe&&<span>{isMe}&nbsp;</span>}
                         {renderFirstMessage()}
-                        <span>-</span>
+                        <span >&nbsp;·&nbsp;</span>
                         <span>{getTimeToNow(firstMessage?.created)} </span>
                     </div>
                 </div>

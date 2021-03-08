@@ -49,7 +49,14 @@ const MessageBlock = ({ isMe = true, message = {}, prev, next, userInfo = {} }) 
             </div>
         }
         else {
-            return <div>console.error();</div>
+            console.log('message.typing', message.typing)
+            return message?.typing===true&&(<div id="wave">
+	
+            <span class="dot one"></span>
+            <span class="dot two"></span>
+            <span class="dot three"></span>
+            
+        </div>)
         }
     }
 
@@ -64,12 +71,7 @@ const MessageBlock = ({ isMe = true, message = {}, prev, next, userInfo = {} }) 
             </div>) : (
                     <div className="w-4"></div>
                 )}
-
-            {/* <div className={classnames("block", {
-                "items-end": isMe
-            })}> */}
             {renderMessage()}
-            {/* </div> */}
         </div>
     )
 }

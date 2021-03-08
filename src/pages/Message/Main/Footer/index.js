@@ -15,11 +15,10 @@ const Footer = (props, ref) => {
     console.log("render MessageForm" && props)
     const { id } = useParams()
     const [message, setMessage] = useState(sessionStorage.getItem(id) || "")
-    const { handleSubmitSendMessage } = useMain()
+    const { handleTypingHook, handleSubmitSendMessage, changing, setChanging } = useMain()
     const inputRef = useRef()
     const [file, setFile] = useState([])
     const [imagePreviewUrl, setImagePreviewUrl] = useState([])
-
     useImperativeHandle(ref, () => ({
         focus: () => {
             inputRef.current.focus();
@@ -28,12 +27,21 @@ const Footer = (props, ref) => {
 
     const handleTyping = (e, flag = false) => {
         setMessage(e.target.value)
-        flag && message ? console.log("emit typing") : console.log("emit done type")
+        if (!e.target.value && changing) {
+            setChanging(false)
+            handleTypingHook(false)
+        }
+        if (e.target.value && changing !== flag) {
+            setChanging(flag)
+            handleTypingHook(flag)
+        }
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setMessage("")
+        setChanging(false)
+        handleTypingHook(false)
         setImagePreviewUrl([])
         if (file?.length > 0) {
             const formData = new FormData();
@@ -111,7 +119,7 @@ const Footer = (props, ref) => {
                         placeholder="Aa"
                         autoComplete="off"
                         value={message}
-                        onChange={e => handleTyping(e, true)}
+                        onInput={e => handleTyping(e, true)}
                         onBlur={e => handleTyping(e, false)}
                     />
                 </div>

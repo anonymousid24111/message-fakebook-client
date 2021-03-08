@@ -31,6 +31,7 @@ const Detail = () => {
             </div>
 
             <div className="p-3 w-full rounded-lg hover:bg-gray-600 cursor-pointer">Privacy & support</div>
+            <div className="p-3 w-full rounded-lg hover:bg-gray-600 cursor-pointer">Shared Media</div>
         </div>
     )
 }
