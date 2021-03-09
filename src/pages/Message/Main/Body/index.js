@@ -52,7 +52,7 @@ const Body = () => {
                     <div className="flex items-end mx-2">
                         <AvatarBlock16 src={userInfo?.avatar} className="w-7 h-7" />
                     </div>
-                    <div id="wave">
+                    <div id="wave" className="bg-gray-600">
                         <span class="dot one"></span>
                         <span class="dot two"></span>
                         <span class="dot three"></span>

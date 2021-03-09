@@ -25,14 +25,14 @@ const ConversationElement = ({ members = {}, conversation = {}, conversationName
             return <div className="w-4 h-4"><LikeFacebook /></div>
         }
         if (firstMessage.kind === "text") {
-            return <div className="conversation-block-content__message">
+            return <div className="overflow-hidden whitespace-nowrap overflow-ellipsis">
                 {firstMessage.content || <i>You have no message</i>}
             </div>
         }
         if (firstMessage.kind === "images") {
             let json = JSON.parse(firstMessage.content)
 
-            return <div className="conversation-block-content__message">
+            return <div className="overflow-hidden whitespace-nowrap overflow-ellipsis">
                 {<i>sent some {json?.length > 1 ? json?.length + " photos." : "a photo."}</i>}
             </div>
         }
@@ -49,18 +49,17 @@ const ConversationElement = ({ members = {}, conversation = {}, conversationName
                     <AvatarBlock16 src={members?.avatar} />
                     {conversation?.status || <span className="absolute bottom-0 right-0 bg-green-500 rounded-full w-4 h-4 border-4 border-current"></span>}
                 </div>
-                <div className="conversation-block-content">
-                    <span className="conversation-block-content__headline">{conversationName || 'null'}</span>
-                    <div className="conversation-block-content__body">
-                        {isMe&&<span>{isMe}&nbsp;</span>}
+                <div className="flex-grow flex flex-col px-2 overflow-hidden">
+                    <span className="overflow-hidden whitespace-nowrap overflow-ellipsis font-semibold">{conversationName || 'null'}</span>
+                    <div className="flex text-sm">
+                        {isMe&&<span className="flex-shrink-0">{isMe}&nbsp;</span>}
                         {renderFirstMessage()}
                         <span >&nbsp;·&nbsp;</span>
-                        <span>{getTimeToNow(firstMessage?.created)} </span>
+                        <span className="flex-shrink-0">{getTimeToNow(firstMessage?.created)} </span>
                     </div>
                 </div>
                 {firstMessage.sender !== localStorage.getItem('user_id') && firstMessage.is_read === 0 &&
-
-                    <span className="w-4 h-4 bg-blue-500 rounded-full" style={{ minWidth: "16px" }}></span>
+                    <span className="w-4 h-4 bg-blue-500 rounded-full flex-shrink-0"></span>
                 }
             </div>
         </NavLink>

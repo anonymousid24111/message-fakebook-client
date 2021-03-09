@@ -95,13 +95,13 @@ const Footer = (props, ref) => {
 
     return (
         <>
-            <BsFillPlusCircleFill className="footer-right__icon" />
+            <BsFillPlusCircleFill className="w-7 h-7 rounded-full fb-cl-main p-1 hover:bg-gray-600 flex-shrink-0" />
             <label htmlFor="image" >
-                <FaImages className="footer-right__icon" />
+                <FaImages className="w-7 h-7 rounded-full fb-cl-main p-1 hover:bg-gray-600 flex-shrink-0" />
             </label>
-            <RiStarSmileFill className="footer-right__icon" />
-            <RiFileGifFill className="footer-right__icon" />
-            <form onSubmit={handleSubmit} className="footer-right__input" id="messageForm">
+            <RiStarSmileFill className="w-7 h-7 rounded-full fb-cl-main p-1 hover:bg-gray-600 flex-shrink-0" />
+            <RiFileGifFill className="w-7 h-7 rounded-full fb-cl-main p-1 hover:bg-gray-600 flex-shrink-0" />
+            <form onSubmit={handleSubmit} className="w-full mx-2" id="messageForm">
                 <div className="w-full rounded-2xl bg-gray-600 p-2 ">
                     {imagePreviewUrl && imagePreviewUrl.map((e, index) => {
                         return (<div className="relative inline-block" key={index}>
@@ -110,12 +110,12 @@ const Footer = (props, ref) => {
                         </div>)
                     })}
                     {imagePreviewUrl?.length > 0 && <label htmlFor="image" className="inline-block w-12 text-black h-12 p-2 bg-gray-400 rounded-lg"><BiImageAdd size="sm" /></label>}
-                    <input id="image" type="file" style={{ display: "none" }} onChange={e => handleChangeFile(e)} multiple />
+                    <input id="image" type="file" className="hidden" onChange={e => handleChangeFile(e)} multiple />
                     <input
                         ref={inputRef}
                         type="text"
                         name="message"
-                        className="w-full  bg-gray-600  focus:outline-none"
+                        className="w-full bg-gray-600  focus:outline-none"
                         placeholder="Aa"
                         autoComplete="off"
                         value={message}
@@ -125,7 +125,7 @@ const Footer = (props, ref) => {
                 </div>
             </form>
             {message ?
-                <button type="submit" className="button-icon" form="messageForm"><IoSend className="footer-right__icon" /></button> :
+                <button type="submit" className="rounded-full w-7 h-7 bg-opacity-0 cursor-pointer" form="messageForm"><IoSend className="w-7 h-7 rounded-full fb-cl-main p-1 hover:bg-gray-600 flex-shrink-0" /></button> :
                 <button type="submit" className="w-7 h-7" form="messageForm">
                     <LikeFacebook />
                 </button>

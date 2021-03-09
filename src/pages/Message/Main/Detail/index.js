@@ -10,25 +10,25 @@ const Detail = () => {
     const { show, userInfo } = useMain()
     const [showOptions, setShowOptions] = useState(false)
     return (
-        show && <div className="flex items-center flex-col border-l w-5/12 p-2 border-gray-600" style={{ display: show ? "flex" : "none" }} >
+        show && <div className="flex items-center flex-col border-l w-96 p-2 border-gray-600">
             <AvatarBlock16 src={userInfo?.avatar} className="w-20 h-20 my-4" />
             <div className="font-semibold text-lg py-3">{userInfo?.userInfoname || userInfo?.email || 'null'}</div>
             <div className="p-3 w-full rounded-lg hover:bg-gray-600 cursor-pointer" onClick={() => setShowOptions(x => !x)}>Customize chat</div>
-            <div className="w-full" style={{ display: showOptions ? "block" : "none" }}>
+            {showOptions && <div className="w-full">
                 <div className="w-full p-3 rounded-lg hover:bg-gray-600 flex flex-row cursor-pointer">
-                    <FaDotCircle className="detail-items__icon" />
-                    <span className="detail-items__text">Cus 1</span>
+                    <FaDotCircle className="w-5 h-5 fb-cl-main" />
+                    <span className="px-2">Cus 1</span>
                 </div>
                 <div className="w-full p-3 rounded-lg hover:bg-gray-600 flex flex-row cursor-pointer">
-                    <div className="detail-items__icon" >
+                    <div className="w-5 h-5 fb-cl-main" >
                         <LikeFacebook />
                     </div>
-                    <span className="detail-items__text">Cus 2</span>
+                    <span className="px-2">Cus 2</span>
                 </div><div className="w-full p-3 rounded-lg hover:bg-gray-600 flex flex-row cursor-pointer">
-                    <RiEdit2Fill className="detail-items__icon" />
-                    <span className="detail-items__text">Cus 3</span>
+                    <RiEdit2Fill className="w-5 h-5 fb-cl-main" />
+                    <span className="px-2">Cus 3</span>
                 </div>
-            </div>
+            </div>}
 
             <div className="p-3 w-full rounded-lg hover:bg-gray-600 cursor-pointer">Privacy & support</div>
             <div className="p-3 w-full rounded-lg hover:bg-gray-600 cursor-pointer">Shared Media</div>

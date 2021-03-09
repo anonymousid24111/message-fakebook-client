@@ -3,7 +3,7 @@ import React from 'react'
 
 const MessageTime = ({time}) => {
     return (
-        <div className="list-chat__time">{toTimeFacebook(time)}</div>
+        <div className="text-center text-xs">{toTimeFacebook(time)}</div>
     )
 }
 

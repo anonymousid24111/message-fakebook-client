@@ -44,7 +44,7 @@ const MessageBlock = ({ isMe = true, message = {}, prev, next, userInfo = {} }) 
             })
             return <div className={classnames("flex flex-wrap", {
                 "justify-end": isMe,
-            })} style={{ maxWidth: "26rem" }} >
+            })} style={{ maxWidth: "384px" }} >
                 {iRender}
             </div>
         }

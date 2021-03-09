@@ -28,7 +28,6 @@ const ListConversations = () => {
     useEffect(() => {
         console.log("ondata", socket)
         socket && socket.on(NEW_CONVERSATION, data => {
-            // console.log("data", listConversations, data)
             setListConversations(x => [data, ...x.filter(y => y._id !== data._id)])
         })
         return () => {
@@ -37,7 +36,7 @@ const ListConversations = () => {
     }, [socket])
 
     return (
-        <div className="list-conversation">
+        <div className="list-conversation  overflow-auto p-1">
             {listConversations?.length > 0 ? listConversations?.map((conversation, index) => {
                 conversation.members = conversation.members.filter(x => x._id !== user)
                 let tempMember = conversation.members[0]

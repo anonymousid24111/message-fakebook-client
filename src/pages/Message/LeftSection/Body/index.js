@@ -40,7 +40,7 @@ const BodyImpl = () => {
             <div className="p-4">
                 <input ref={refInput} type="text" value={keyword} onChange={(e) => handleSearchKeywordChange(e)} className="w-full rounded-full focus: outline-none bg-gray-600 p-2 " placeholder="Search Message" onFocus={() => setSearching(true)} />
             </div>
-            <div className="list-container" ref={ref} onClick={() => setSearching(false)} >
+            <div className="relative z-0 h-full" ref={ref} onClick={() => setSearching(false)} >
                 <ListConversations />
                 {searching && <ListSearchUsers keyword={keyword} />}
             </div>
