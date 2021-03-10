@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom'
 import { getTimeToNow } from 'functions/formatTime'
 import AvatarBlock16 from 'components/AvatarBlock16'
 import LikeFacebook from 'components/LikeFacebook'
+import SentStatus from 'pages/Message/Main/Body/SentStatus'
+import ReceivedStatus from 'pages/Message/Main/Body/ReceivedStatus'
 
 const ConversationElement = ({ members = {}, conversation = {}, conversationName = "", firstMessage = {}, conversationId = "" }) => {
     let is_read, isMe = "";
@@ -11,7 +13,7 @@ const ConversationElement = ({ members = {}, conversation = {}, conversationName
         isMe = "You: "
     }
     else {
-        if (firstMessage?.is_read === 1) {
+        if (firstMessage?.is_read !== 0) {
             is_read = true
         } else {
             is_read = false
@@ -41,6 +43,21 @@ const ConversationElement = ({ members = {}, conversation = {}, conversationName
         }
     }
 
+    const renderStatusFirstMessage = () => {
+        console.log('firstMessage', firstMessage)
+        if (firstMessage.sender !== localStorage.getItem('user_id') && firstMessage.is_read === 0)
+            return <span className="w-4 h-4 bg-blue-500 rounded-full flex-shrink-0"></span>
+        if (firstMessage.sender === localStorage.getItem('user_id') && firstMessage.is_read === 0){
+            return <SentStatus />
+        }
+        if (firstMessage.sender === localStorage.getItem('user_id') && firstMessage.is_read === 1){
+            return <ReceivedStatus />
+        }
+        if (firstMessage.sender === localStorage.getItem('user_id') && firstMessage.is_read === 2){
+            return <AvatarBlock16 src={members?.avatar} className="w-4 h-4" />
+        }
+    }
+
     return (
         <NavLink activeClassName="bg-active" className="hover:bg-gray-600" to={`/message/t/${conversationId}`}>
             <div className="flex items-center no-underline p-3 items-center rounded-xl"
@@ -49,18 +66,16 @@ const ConversationElement = ({ members = {}, conversation = {}, conversationName
                     <AvatarBlock16 src={members?.avatar} />
                     {conversation?.status || <span className="absolute bottom-0 right-0 bg-green-500 rounded-full w-4 h-4 border-4 border-current"></span>}
                 </div>
-                <div className="flex-grow flex flex-col px-2 overflow-hidden">
+                <div className="flex-grow flex-col px-2 overflow-hidden hidden lg:flex">
                     <span className="overflow-hidden whitespace-nowrap overflow-ellipsis font-semibold">{conversationName || 'null'}</span>
                     <div className="flex text-sm">
-                        {isMe&&<span className="flex-shrink-0">{isMe}&nbsp;</span>}
+                        {isMe && <span className="flex-shrink-0">{isMe}&nbsp;</span>}
                         {renderFirstMessage()}
                         <span >&nbsp;·&nbsp;</span>
                         <span className="flex-shrink-0">{getTimeToNow(firstMessage?.created)} </span>
                     </div>
                 </div>
-                {firstMessage.sender !== localStorage.getItem('user_id') && firstMessage.is_read === 0 &&
-                    <span className="w-4 h-4 bg-blue-500 rounded-full flex-shrink-0"></span>
-                }
+                {renderStatusFirstMessage()}
             </div>
         </NavLink>
     )

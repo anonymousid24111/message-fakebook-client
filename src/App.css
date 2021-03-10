@@ -70,12 +70,6 @@ body {
     font-size: var(--font-size);
 }
 
-.container-left {
-    min-width: 360px;
-    width: 360px;
-    border-right: solid 1px var(--background-items);
-}
-
 .list-conversation {
     border-top: solid 1px var(--background-items);
 }

@@ -2,7 +2,7 @@ import React, { useContext, createContext, useState, useEffect } from "react";
 
 import { useParams } from 'react-router-dom';
 
-import { JOIN, OUT_ROOM, SEND_MESSAGE, TYPING } from 'commons/socketEvents'
+import { ISREAD, JOIN, OUT_ROOM, SEND_MESSAGE, TYPING } from 'commons/socketEvents'
 import { useAuth } from 'hooks/useAuth';
 
 import callApiHttp from 'functions/callApiHttp';
@@ -107,9 +107,15 @@ function useProvideMain() {
         if (!conversation) return
         const { _id } = conversation
         if (!_id) return
-        socket.emit(JOIN, _id)
+        socket.emit(JOIN, { conversationId: _id, userId: localStorage.getItem("user_id"), members: conversation?.members })
         socket.on(RECEIVE_MESSAGE, data => {
             console.log('data ', data)
+            // error
+            // socket.emit(ISREAD, {
+            //     conversationId: _id,
+            //     members: conversation.members,
+            //     userId: localStorage.getItem("user_id")
+            // })
             setConversation(x => ({ ...x, messages: [...x.messages, data] }))
         })
         socket.on(TYPING, data => {
@@ -121,7 +127,7 @@ function useProvideMain() {
             socket && socket.off(RECEIVE_MESSAGE) && socket.off(TYPING)
             _id && socket && socket.emit(OUT_ROOM, _id)
         }
-    }, [socket, conversation, typing])
+    }, [socket, conversation])
 
     return {
         show,

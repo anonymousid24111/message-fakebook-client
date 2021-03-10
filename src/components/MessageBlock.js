@@ -3,6 +3,8 @@ import classnames from 'classnames'
 import { Link } from 'react-router-dom'
 import AvatarBlock16 from './AvatarBlock16'
 import LikeFacebook from './LikeFacebook'
+import SentStatus from 'pages/Message/Main/Body/SentStatus'
+import ReceivedStatus from 'pages/Message/Main/Body/ReceivedStatus'
 const MessageBlock = ({ isMe = true, message = {}, prev, next, userInfo = {} }) => {
     const renderMessage = () => {
         const { kind } = message
@@ -39,37 +41,58 @@ const MessageBlock = ({ isMe = true, message = {}, prev, next, userInfo = {} }) 
         }
         if (kind === "images") {
             var images = JSON.parse(message.content)
-            var iRender = images.map((image, index) => {
-                return <img src={image} alt="images" className="object-cover rounded-lg flex-grow flex-shrink inline w-32 m-1" key={index} />
-            })
-            return <div className={classnames("flex flex-wrap", {
-                "justify-end": isMe,
-            })} style={{ maxWidth: "384px" }} >
-                {iRender}
-            </div>
-        }
-        else {
-            console.log('message.typing', message.typing)
-            return message?.typing===true&&(<div id="wave">
-	
-            <span class="dot one"></span>
-            <span class="dot two"></span>
-            <span class="dot three"></span>
-            
-        </div>)
+            var numberOfImages = images.length
+            if (numberOfImages === 1) {
+                return <img src={images[0]} alt="images" className="object-cover rounded-lg w-96 h-96 m-1" />
+            }
+            if (numberOfImages === 2) {
+                return <div className="flex space-x-2">
+                    {images.map((image, index) => {
+                        return <img src={image} alt="images" className="object-cover rounded-lg w-48 h-48" key={index} />
+                    })}
+                </div>
+            }
+            else {
+                return <div className={classnames("flex flex-wrap max-w-sm -m-1", {
+                    "justify-end": isMe,
+                })} >
+                    {images.map((image, index) => {
+                        return <img src={image} alt="images" className="object-cover rounded-lg w-32 h-32 p-1" key={index} />
+                    })}
+                </div>
+            }
         }
     }
 
+    const renderLastMessage = () => {
+        if (message.status === 'sent') {
+            return <SentStatus />
+        }
+        if (message.status === 'received') {
+            return <ReceivedStatus />
+        }
+        if (message.status === 'read') {
+            return <AvatarBlock16 className="w-4 h-4" />
+        }
+        if (message.status === 'error') {
+            return <SentStatus />
+        }
 
-
+    }
 
 
     return (
         <div className={classnames("flex p-0.5", { "flex-row-reverse": isMe })}>
-            {!isMe ? (<div className="flex items-end mx-2">
-                {next ? <span className="w-7 h-7"></span> : <AvatarBlock16 src={userInfo?.avatar} className="w-7 h-7" />}
-            </div>) : (
-                    <div className="w-4"></div>
+            {!isMe ? (
+                <div className="flex items-end mx-2">
+                    {next ?
+                        <span className="w-7 h-7"></span> :
+                        <AvatarBlock16 src={userInfo?.avatar} className="w-7 h-7" />}
+                </div>) :
+                (
+                    <div className="w-4 flex items-end">
+                        {renderLastMessage()}
+                    </div>
                 )}
             {renderMessage()}
         </div>

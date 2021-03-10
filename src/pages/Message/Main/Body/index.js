@@ -9,38 +9,15 @@ import AvatarBlock16 from 'components/AvatarBlock16';
 const Body = () => {
     const { user } = useAuth()
     const { conversation, userInfo, typing } = useMain()
-    console.log("typing....", typing)
-
     return (
 
-        <div className="list-chat__left">
+        <div>
             {conversation?.messages?.length > 0 ? conversation.messages.map((message, index, messages) => {
-                console.log('message', message)
                 let prev, next
-                if (messages[index - 1]?.sender === message?.sender &&
-                    new Date(message?.created).getTime() - new Date(messages[index - 1]?.created).getTime() < 1000 * 60) {
-                    prev = 1;
-                }
-                else {
-                    prev = 0;
-                }
-                if (messages[index + 1]?.sender === message?.sender &&
-                    new Date(messages[index + 1]?.created).getTime() - new Date(message?.created).getTime() < 1000 * 60) {
-                    next = 1;
-                }
-                else {
-                    next = 0;
-                }
-                if (message.kind === "typing") {
-                    //     if (message.typing === true && messages[index + 1]) {
-                    //         return null
-                    //     }
-                    if (message.typing === false) {
-                        return null
-                    }
-                }
-
-
+                prev = messages[index - 1]?.sender === message?.sender &&
+                    new Date(message?.created).getTime() - new Date(messages[index - 1]?.created).getTime() < 1000 * 60 ? 1 : 0
+                next = (messages[index + 1]?.sender === message?.sender &&
+                    new Date(messages[index + 1]?.created).getTime() - new Date(message?.created).getTime() < 1000 * 60) ? 1 : 0
                 let isMe = user === message?.sender
                 return <div key={index}>
                     {!prev && <MessageTime time={message?.created} />}
@@ -53,9 +30,9 @@ const Body = () => {
                         <AvatarBlock16 src={userInfo?.avatar} className="w-7 h-7" />
                     </div>
                     <div id="wave" className="bg-gray-600">
-                        <span class="dot one"></span>
-                        <span class="dot two"></span>
-                        <span class="dot three"></span>
+                        <span className="dot one"></span>
+                        <span className="dot two"></span>
+                        <span className="dot three"></span>
                     </div>
                 </div>}
         </div>

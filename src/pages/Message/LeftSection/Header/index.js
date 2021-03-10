@@ -10,7 +10,7 @@ import { useProvideUser } from 'hooks/useUser'
 const Header = () => {
     const { userInfo } = useProvideUser()
     return (
-        <div className="p-5 flex flex-row items-center space-x-2 border-b border-gray-600" >
+        <div className="p-5 flex flex-row items-center space-x-2 border-b border-gray-600 hidden lg:flex" >
             <Link to="/">
                 <AvatarBlock16 src={userInfo?.avatar} className="w-10 h-10" />
             </Link>

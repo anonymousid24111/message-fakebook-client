@@ -1,5 +1,4 @@
 import React, { useContext, createContext, useState, useEffect } from "react";
-// import { useSocket } from "./useSocket";
 import { JOIN } from 'commons/socketEvents'
 import { API_URL } from "commons/constants";
 import io from "socket.io-client";
@@ -23,7 +22,7 @@ function useProvideAuth() {
     const [user, setUser] = useState(localStorage.getItem('user_id'));
     const [socket, setSocket] = useState()
     useEffect(() => {
-        user && socket && socket.emit(JOIN, user)
+        user && socket && socket.emit(JOIN, { userId: user })
         return () => {
             socket && socket.disconnect()
         }

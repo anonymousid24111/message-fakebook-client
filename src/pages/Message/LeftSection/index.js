@@ -6,7 +6,7 @@ const LeftSection = () => {
     const memoHeader= useMemo(() => <Header />, [])
     const memeBody = useMemo(() => <Body/>, [])
     return (
-        <div className="container-left flex flex-col">
+        <div className="w-24 lg:w-96 border-r border-gray-600 flex flex-col">
             {memoHeader}
             {memeBody}
         </div>
