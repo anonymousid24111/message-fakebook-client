@@ -21,7 +21,7 @@ const Detail = () => {
                 </div>
                 <button
                     type="button"
-                    className="p-3 w-full rounded-lg hover:bg-gray-600 cursor-pointer"
+                    className="p-3 w-full rounded-lg hover:bg-gray-600 cursor-pointer focus:outline-none text-left"
                     onClick={() => setShowOptions((x) => !x)}
                 >
                     Customize chat

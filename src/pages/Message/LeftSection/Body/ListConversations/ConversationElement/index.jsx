@@ -134,11 +134,11 @@ const ConversationElement = ({
 }
 
 ConversationElement.propTypes = {
-    members: PropTypes.objectOf(PropTypes.string).isRequired,
-    conversation: PropTypes.objectOf(PropTypes.string).isRequired,
-    conversationName: PropTypes.string.isRequired,    
-    firstMessage: PropTypes.string.isRequired,    
-    conversationId: PropTypes.string.isRequired,    
+    members: PropTypes.objectOf(PropTypes.any).isRequired,
+    conversation: PropTypes.objectOf(PropTypes.any).isRequired,
+    conversationName: PropTypes.string.isRequired,
+    firstMessage: PropTypes.objectOf(PropTypes.any).isRequired,
+    conversationId: PropTypes.string.isRequired,
 }
 
 export default ConversationElement

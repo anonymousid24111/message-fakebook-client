@@ -8,9 +8,9 @@ import LeftSection from './LeftSection'
 
 function MessageNotId() {
     return (
-        <div className="flex justify-center items-center w-full">
+        <div className="flex justify-center items-center flex-grow">
             <div className="text-3xl">
-                Select a thread or start a new conversation{' '}
+                Select a thread or start a new conversation
             </div>
         </div>
     )

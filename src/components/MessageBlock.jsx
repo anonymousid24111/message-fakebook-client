@@ -147,10 +147,10 @@ const MessageBlock = ({
 
 MessageBlock.propTypes = {
     isMe: PropTypes.bool.isRequired,
-    message: PropTypes.string.isRequired,
-    prev: PropTypes.bool.isRequired,
-    next: PropTypes.bool.isRequired,
-    userInfo: PropTypes.objectOf(PropTypes.string).isRequired,
+    message: PropTypes.objectOf(PropTypes.any).isRequired,
+    prev: PropTypes.number.isRequired,
+    next: PropTypes.number.isRequired,
+    userInfo: PropTypes.objectOf(PropTypes.any).isRequired,
 }
 
 export default MessageBlock

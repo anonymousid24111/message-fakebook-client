@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 
 const GEmoji = ({ onPickEmoji, isOpen = false, setOpen }) => {
+    const emojiRef = useRef()
     useEffect(() => {
         const handlePickEmoji = (event) => {
-            if (event.target.alt) {
-                onPickEmoji && onPickEmoji(event.target.alt)
-            } else {
+            if (emojiRef && !emojiRef.current.contains(event.target)) {
                 setOpen && setOpen(false)
+            } else {
+                event.target.alt && onPickEmoji && onPickEmoji(event.target.alt)
             }
         }
         document.addEventListener('mousedown', handlePickEmoji)
@@ -19,6 +20,7 @@ const GEmoji = ({ onPickEmoji, isOpen = false, setOpen }) => {
 
     return (
         <div
+            ref={emojiRef}
             className={classnames(
                 'absolute bottom-full left-1/2 flex bg-gray-500 max-w-xs flex-wrap p-1 h-56 overflow-auto rounded-lg border',
                 { hidden: !isOpen }

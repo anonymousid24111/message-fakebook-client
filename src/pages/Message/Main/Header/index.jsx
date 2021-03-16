@@ -11,8 +11,7 @@ const Header = () => {
     const { setShow, userInfo } = useMain()
 
     function renderRedirect() {
-        const { _id } = userInfo
-        if (_id) {
+        if (userInfo) {
             return null
         }
         return <Redirect to="/message/t" />
@@ -24,7 +23,7 @@ const Header = () => {
             <AvatarBlock16 src={userInfo?.avatar} className="w-10 h-10" />
             <div className="flex-grow">
                 <div className="text-lg font-semibold">
-                    {userInfo?.name || userInfo?.email || 'null'}
+                    {userInfo?.username || userInfo?.email || 'null'}
                 </div>
                 <div className="conversation-block-content__body">status</div>
             </div>

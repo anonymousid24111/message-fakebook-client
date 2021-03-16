@@ -1,8 +1,8 @@
 import callApiHttp from 'functions/callApiHttp'
 import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
-function Login() {
+const Login = () => {
     const location = useLocation()
 
     const { from } = location.state || { from: { pathname: '/' } }
@@ -34,45 +34,57 @@ function Login() {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     return (
-        <div className="w-screen h-screen flex items-center justify-center bg-black">
-            <form
-                onSubmit={login}
-                className="w-96 fb-bg-dark rounded-xl p-7 space-y-3"
-            >
-                <label htmlFor="email">
-                    <div className="font-bold text-lg ">Email:</div>
+        <div className="w-screen h-screen flex md:flex-row flex-col bg-gray-200 text-black">
+            <div className="md:flex-1 box-content flex flex-col justify-center pl-20 space-y-5">
+                <span className="text-blue-500 font-bold text-5xl">
+                    Fakebook
+                </span>
+                <span className="text-black font-semibold text-xl">
+                    Fakebook helps you connect and share with the people in your
+                    life.
+                </span>
+            </div>
+            <div className="flex-1  flex items-center justify-center p-10">
+                <form
+                    onSubmit={login}
+                    className="bg-gray-100 rounded-md space-y-4 w-min p-4"
+                >
                     <input
-                        className="fb-bg-dark-2 px-3 py-2 rounded-full outline-none w-full"
+                        className="p-4 rounded-md outline-none w-96 border border-gray-300"
                         id="email"
                         type="text"
                         name="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="email"
+                        placeholder="Email address or phone number"
                     />
-                </label>
-                <label htmlFor="password">
-                    <div className="font-bold text-lg " htmlFor="password">
-                        Password:
-                    </div>
                     <input
                         type="password"
-                        className="fb-bg-dark-2 px-3 py-2 rounded-full outline-none w-full"
+                        className="p-4 rounded-md outline-none w-96 border border-gray-300"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholde="password"
+                        placeholder="Password"
                     />
-                </label>
-                <div className="flex justify-end">
                     <button
-                        type="button"
-                        className="fb-bg-main px-3 py-2 rounded-full"
+                        type="submit"
+                        className="fb-bg-main p-3 text-white text-2xl font-semibold rounded-md w-96"
                     >
                         Log in
                     </button>
-                </div>
-            </form>
-
+                    <hr />
+                    <div className="text-blue-500 text-sm text-center">
+                        <Link>Forgotten password?</Link>
+                    </div>
+                    <div className="flex justify-center">
+                        <button
+                            type="button"
+                            className="bg-green-500 text-white p-3 rounded-md text-xl font-semiblod"
+                        >
+                            Create New Account
+                        </button>
+                    </div>
+                </form>
+            </div>
             {error && <div>Error: {error}</div>}
         </div>
     )

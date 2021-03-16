@@ -13,6 +13,7 @@ const Body = () => {
         <div>
             {conversation?.messages?.length > 0 ? (
                 conversation.messages.map((message, index, messages) => {
+                    const { _id } = message
                     const prev =
                         messages[index - 1]?.sender === message?.sender &&
                         new Date(message?.created).getTime() -
@@ -29,7 +30,7 @@ const Body = () => {
                             : 0
                     const isMe = user === message?.sender
                     return (
-                        <div key={message}>
+                        <div key={_id}>
                             {!prev && <MessageTime time={message?.created} />}
                             <MessageBlock
                                 message={message}

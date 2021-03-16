@@ -2,7 +2,7 @@ import React from 'react'
 import logo from 'assets/images/avatar.jpg'
 import PropTypes from 'prop-types'
 
-const AvatarBlock16 = ({ src = logo, className = 'w-16 h-16' }) => (
+const AvatarBlock16 = ({ src, className }) => (
     <img
         src={src}
         alt="avatar"
@@ -11,11 +11,12 @@ const AvatarBlock16 = ({ src = logo, className = 'w-16 h-16' }) => (
 )
 
 AvatarBlock16.defaultProps = {
+    src: logo,
     className: 'w-16 h-16',
 }
 
 AvatarBlock16.propTypes = {
-    src: PropTypes.string.isRequired,
+    src: PropTypes.string,
     className: PropTypes.string,
 }
 

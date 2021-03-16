@@ -22,7 +22,7 @@ const MainImpl = () => {
                 >
                     <Body />
                 </div>
-                <div className="flex items-center py-4 px-3 border-t border-gray-600">
+                <div className="flex items-end p-3">
                     <Footer ref={inputRef} />
                 </div>
             </div>

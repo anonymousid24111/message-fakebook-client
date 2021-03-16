@@ -33,7 +33,9 @@ function useProvideMain() {
     const { id } = useParams()
     const { socket, user } = useAuth()
     const [conversation, setConversation] = useState()
-    const [userInfo, setUserInfo] = useState()
+    const [userInfo, setUserInfo] = useState(
+        JSON.parse(localStorage.getItem('user_info'))
+    )
     const [typing, setTyping] = useState(false)
     const [changing, setChanging] = useState(false)
     const handleTypingHook = (flag) => {
@@ -48,7 +50,7 @@ function useProvideMain() {
     }
 
     const handleSubmitSendMessage = (e, kind = 'text') => {
-        const now = Date.now()
+        const now = new Date().toISOString()
         const { _id } = conversation
         socket.emit(SEND_MESSAGE, {
             sender: user,
@@ -67,6 +69,7 @@ function useProvideMain() {
                       messages: [
                           ...x?.messages,
                           {
+                              _id: now,
                               kind,
                               content: e,
                               sender: user,
@@ -78,6 +81,7 @@ function useProvideMain() {
                       members: [id, user],
                       messages: [
                           {
+                              _id: now,
                               kind,
                               content: e,
                               sender: user,
@@ -105,7 +109,7 @@ function useProvideMain() {
                         isSubscribed && setConversation({})
                     }
                 } else {
-                    // console.log(data.message)
+                    // console.log('err', data)
                 }
             } catch (error) {
                 // console.log(error)

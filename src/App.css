@@ -29,6 +29,15 @@
 .fb-bg-active{
     color: #2d88ff;
 }
+.fb-bg-active .link-active{
+    display: inline;
+}
+.fb-bg-active .link-nonactive{
+    display: none;
+}
+.link-active{
+    display: none;
+}
 #wave {
 	display: inline;
 	padding: 5px 10px;

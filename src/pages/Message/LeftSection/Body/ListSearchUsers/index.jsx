@@ -8,9 +8,10 @@ const ListSearchUsers = () => {
     return (
         <div className="w-96 h-full absolute top-0 left-0 bg-black p-2">
             {listUsers?.length > 0 ? (
-                listUsers.map((user, index) => (
-                    <SearchUserElement key={user} user={user} />
-                ))
+                listUsers.map((user) => {
+                    const { _id } = user
+                    return <SearchUserElement key={_id} user={user} />
+                })
             ) : (
                 <div className="loader" />
             )}
