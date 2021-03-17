@@ -1,101 +1,32 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useUser, ProvideUser } from 'hooks/useUser'
-import callApiHttp from 'functions/callApiHttp'
+import React, { useState } from 'react'
+import { ProvideUser } from 'hooks/useUser'
 import logo from 'assets/images/avatar.jpg'
 import { IoIosCamera } from 'react-icons/io'
 
-const ProfileImpl = () => {
-    const user = useUser()
-    const { userInfo = null } = user
-    const modalRef = useRef(null)
-    const [error, setError] = useState()
+import useHookProfile from './hooks'
+import ListsFriendsProfile from './ListFriends'
+import FormUpdateProfile from './FormUpdateProfile'
+import NavProfile from './NavProfile'
+import DropdownEditCover from './DropdownEditCover'
+import ModalEditAvatar from './ModalEditAvatar'
 
-    const [modal, setModal] = useState()
+const ProfileImpl = () => {
+    const {
+        userInfo,
+        modal,
+        setModal,
+        modalRef,
+        previewAvatar,
+        handleChangeCover,
+        handleSubmitAvatar,
+        handleChangeAvatar,
+        handleUnfriend,
+        handleSubmitInfo,
+    } = useHookProfile()
     const [showOptionsEditCover, setShowOptionsEditCover] = useState(false)
 
-    const [avatar, setAvatar] = useState()
-    const [previewAvatar, setPreviewAvatar] = useState()
-    const handleChangeAvatar = (e) => {
-        e.preventDefault()
-        const file = e.target.files[0]
-        const reader = new FileReader()
-        reader.onloadend = () => {
-            setAvatar(file)
-            setPreviewAvatar(reader.result)
-        }
-        reader.readAsDataURL(file)
-    }
-
-    const handleChangeCover = async (e) => {
-        e.preventDefault()
-        const file = e.target.files[0]
-        const formData = new FormData()
-        formData.append('cover_image', file)
-        const { data } = await callApiHttp({
-            method: 'POST',
-            url: '/user/upload_cover_image',
-            data: formData,
-        })
-        if (data.code === 1000) {
-            // alert('upload thanh cong')
-            // setModal(false)
-            // setAvatar(null)
-        } else {
-            // alert('upload fail')
-        }
-    }
-
-    const handleSubmitAvatar = async (e) => {
-        e.preventDefault()
-        const formData = new FormData()
-        formData.append('avatar', avatar)
-
-        const { data } = await callApiHttp({
-            method: 'POST',
-            url: '/user/upload_avatar',
-            data: formData,
-        })
-        if (data.code === 1000) {
-            // alert('upload thanh cong')
-            setModal(false)
-            setAvatar(null)
-        } else {
-            // alert('upload fail')
-        }
-    }
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (modalRef.current && !modalRef.current.contains(event.target))
-                setModal(false)
-        }
-        document.addEventListener('mousedown', handleClickOutside)
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside)
-        }
-    }, [modalRef])
-
-    const handleUnfriend = async (userId) => {
-        try {
-            const { data } = await callApiHttp({
-                method: 'POST',
-                url: '/friend/set_unfriend',
-                data: {
-                    userId,
-                },
-            })
-            if (data.code === 1000) {
-                // alert('success')
-            } else {
-                // alert('failed')
-            }
-        } catch (error1) {
-            setError(error1?.message)
-        }
-    }
-
     return (
-        <div className="w-full h-full flex flex-col bg-gray-900 ">
+        <div className="w-full min-h-full flex flex-col bg-gray-900 ">
             <div className="h-96 relative pb-4 box-content flex flex-row justify-center">
                 <div className="relative" style={{ width: '940px' }}>
                     <img
@@ -113,27 +44,9 @@ const ProfileImpl = () => {
                             Edit cover photo
                         </button>
                         {showOptionsEditCover && (
-                            <div className="absolute right-0 bg-gray-700 p-2 rounded-lg">
-                                <label
-                                    htmlFor="cover"
-                                    className="p-2 hover:bg-gray-800 w-60 rounded-lg"
-                                >
-                                    <input
-                                        id="cover"
-                                        type="file"
-                                        className="hidden"
-                                        onChange={(e) => handleChangeCover(e)}
-                                    />
-                                    Upload Photo
-                                </label>
-                                <div className="p-2 hover:bg-gray-800 w-60 rounded-lg">
-                                    Select Photo
-                                </div>
-                                <hr />
-                                <div className="p-2 hover:bg-gray-800 w-60 rounded-lg">
-                                    Remove
-                                </div>
-                            </div>
+                            <DropdownEditCover
+                                handleChangeCover={handleChangeCover}
+                            />
                         )}
                     </div>
                 </div>
@@ -152,79 +65,12 @@ const ProfileImpl = () => {
                         onClick={() => setModal(true)}
                     />
                     {modal && (
-                        <div className=" fixed z-10 pt-20 top-0 left-0 w-full h-full overflow-auto bg-black bg-opacity-25">
-                            <div
-                                ref={modalRef}
-                                className="relative m-auto p-0 border border-black w-6/12 bg-white text-black"
-                            >
-                                <div className="text-center text-lg">
-                                    Update Profile Picture
-                                </div>
-                                <form onSubmit={handleSubmitAvatar}>
-                                    {previewAvatar ? (
-                                        <div className="">
-                                            <img
-                                                src={previewAvatar}
-                                                alt="avatarupload"
-                                                className="object-cover"
-                                            />
-                                            <div>
-                                                <button type="button">
-                                                    Cancel
-                                                </button>
-                                                <button type="submit">
-                                                    Save
-                                                </button>
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        <div className="">
-                                            <div className="flex flex-row">
-                                                <button
-                                                    type="button"
-                                                    className="rounded-lg text-blue flex-grow bg-blue-400"
-                                                >
-                                                    <label htmlFor="avatar">
-                                                        <input
-                                                            id="avatar"
-                                                            type="file"
-                                                            className="hidden"
-                                                            onChange={(e) =>
-                                                                handleChangeAvatar(
-                                                                    e
-                                                                )
-                                                            }
-                                                        />
-                                                        Upload Photo
-                                                    </label>
-                                                </button>
-
-                                                <button
-                                                    type="button"
-                                                    className="rounded-lg text-blue flex-grow bg-gray-400"
-                                                >
-                                                    Add Frame
-                                                </button>
-                                                <button
-                                                    type="button"
-                                                    className="rounded-lg text-blue"
-                                                >
-                                                    Edit
-                                                </button>
-                                            </div>
-                                            <div className="">
-                                                <div>Profile Pictures</div>
-                                                <div>list 6 photos</div>
-                                            </div>
-                                            <div className="">
-                                                <div>Cover Photos</div>
-                                                <div>list 6 photos</div>
-                                            </div>
-                                        </div>
-                                    )}
-                                </form>
-                            </div>
-                        </div>
+                        <ModalEditAvatar
+                            modalRef={modalRef}
+                            previewAvatar={previewAvatar}
+                            handleChangeAvatar={handleChangeAvatar}
+                            handleSubmitAvatar={handleSubmitAvatar}
+                        />
                     )}
                 </div>
             </div>
@@ -233,33 +79,17 @@ const ProfileImpl = () => {
                     {userInfo?.username || 'Null'}
                 </div>
             </div>
-            <ul className="flex flex-row space-x-4 p-4">
-                <li className="p-3 bg-blue-900 w-20 text-center">Post</li>
-                <li className="p-3 bg-blue-900 w-20 text-center">About</li>
-                <li className="p-3 bg-blue-900 w-20 text-center">Friends</li>
-                <li className="p-3 bg-blue-900 w-20 text-center">Mores</li>
-            </ul>
-            <div>email: {userInfo?.email}</div>
-            <div>birthday: {userInfo?.birthday}</div>
-            <div>friends: </div>
-            <div className="pl-5rem">
-                {userInfo?.friends?.length > 0 ? (
-                    userInfo.friends.map((friend) => (
-                        <div key={friend}>
-                            {friend}
-                            <button
-                                type="button"
-                                onClick={() => handleUnfriend(friend)}
-                            >
-                                Unfriend
-                            </button>
-                        </div>
-                    ))
-                ) : (
-                    <div>You have no friend</div>
-                )}
+            <div className="px-72">
+                <NavProfile />
+                <FormUpdateProfile
+                    userInfo={userInfo}
+                    handleSubmitInfo={handleSubmitInfo}
+                />
+                <ListsFriendsProfile
+                    friends={userInfo?.friends}
+                    handleUnfriend={handleUnfriend}
+                />
             </div>
-            {error && <div>Error: {error}</div>}
         </div>
     )
 }

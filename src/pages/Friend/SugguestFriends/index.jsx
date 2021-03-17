@@ -76,8 +76,12 @@ const SuggestFriends = ({ users = [] }) => {
     )
 }
 
+SuggestFriends.defaultProps = {
+    users: [],
+}
+
 SuggestFriends.propTypes = {
-    users: PropTypes.arrayOf(PropTypes.any).isRequired,
+    users: PropTypes.arrayOf(PropTypes.any),
 }
 
 export default SuggestFriends

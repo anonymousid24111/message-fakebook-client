@@ -1,6 +1,6 @@
 import callApiHttp from 'functions/callApiHttp'
 import React, { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 
 const Login = () => {
     const location = useLocation()
@@ -76,12 +76,12 @@ const Login = () => {
                         <Link>Forgotten password?</Link>
                     </div>
                     <div className="flex justify-center">
-                        <button
-                            type="button"
+                        <NavLink
+                            to="/signup"
                             className="bg-green-500 text-white p-3 rounded-md text-xl font-semiblod"
                         >
                             Create New Account
-                        </button>
+                        </NavLink>
                     </div>
                 </form>
             </div>

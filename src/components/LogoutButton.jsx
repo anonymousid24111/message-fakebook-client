@@ -9,7 +9,7 @@ const LogoutButton = () => (
         type="button"
         onClick={() => {
             localStorage.clear()
-            window.location.href = '/'
+            window.location.href = '/login'
         }}
     >
         Logout

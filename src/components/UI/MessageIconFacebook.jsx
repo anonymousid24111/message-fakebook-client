@@ -5,8 +5,8 @@ const MessageIconFacebook = () => (
         viewBox="0 0 28 28"
         fill="white"
         alt="message-icon"
-        height="28"
-        width="28"
+        height="20"
+        width="20"
     >
         <path
             d="M14 2.042c6.76 0 12 4.952 12 11.64S20.76 25.322 14 25.322a13.091 13.091 0 0 1-3.474-.461.956 

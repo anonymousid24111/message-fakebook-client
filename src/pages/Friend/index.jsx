@@ -1,4 +1,3 @@
-import NavBar from 'components/NavBar'
 import React from 'react'
 // import routes from 'routes'
 import { Route, Switch, useParams } from 'react-router-dom'
@@ -14,8 +13,7 @@ const FriendImpl = () => {
     const { user_id: userId } = useParams()
 
     return (
-        <div className="w-screen h-screen flex flex-col">
-            <NavBar />
+        <div className="w-full h-full flex flex-col">
             <div className="flex flex-row flex-grow">
                 <div className="w-96">
                     <MyRequestFriends users={userFriends?.sentRequestFriends} />

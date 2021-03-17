@@ -44,8 +44,13 @@ const NewRequestFriends = ({ users = [] }) => {
         </div>
     )
 }
+
+NewRequestFriends.defaultProps = {
+    users: [],
+}
+
 NewRequestFriends.propTypes = {
-    users: PropTypes.arrayOf(PropTypes.any).isRequired,
+    users: PropTypes.arrayOf(PropTypes.any),
 }
 
 export default NewRequestFriends

@@ -18,7 +18,7 @@ function MessageNotId() {
 
 function Message() {
     return (
-        <div className="w-screen h-screen flex">
+        <div className="w-full h-full flex">
             <LeftSection />
             <Switch>
                 <Route path="/message/t/" exact component={MessageNotId} />
