@@ -8,6 +8,7 @@ import {
     SEND_MESSAGE,
     TYPING,
     RECEIVE_MESSAGE,
+    ISREAD,
 } from 'commons/socketEvents'
 import { useAuth } from 'hooks/useAuth'
 
@@ -105,6 +106,8 @@ function useProvideMain() {
                         const { member, conversations } = data.data
                         isSubscribed && setUserInfo(member)
                         isSubscribed && setConversation(conversations)
+                        const { _id } = conversations
+                        sessionStorage.setItem('conversationId', _id)
                     } else {
                         isSubscribed && setConversation({})
                     }
@@ -131,12 +134,13 @@ function useProvideMain() {
             members: conversation?.members,
         })
         socket.on(RECEIVE_MESSAGE, (data) => {
-            // error
-            // socket.emit(ISREAD, {
-            //     conversationId: _id,
-            //     members: conversation.members,
-            //     userId: localStorage.getItem("user_id")
-            // })
+            // console.log(`data`, data)
+            socket.emit(ISREAD, {
+                conversationId: _id,
+                members: conversation.members,
+                userId: localStorage.getItem('user_id'),
+                receiverId: data.sender,
+            })
             setConversation((x) => ({ ...x, messages: [...x.messages, data] }))
         })
         socket.on(TYPING, (data) => {

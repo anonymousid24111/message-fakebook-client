@@ -11,9 +11,12 @@ const PrivateRoute = ({ component: Component, path }) => (
         render={() => (isLogin() ? <Component /> : <Redirect to="/login" />)}
     />
 )
+PrivateRoute.defaultProps = {
+    component: <></>,
+}
 
 PrivateRoute.propTypes = {
-    component: PropTypes.node.isRequired,
+    component: PropTypes.func,
     path: PropTypes.string.isRequired,
 }
 

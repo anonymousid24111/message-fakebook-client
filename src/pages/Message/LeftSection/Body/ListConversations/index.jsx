@@ -8,7 +8,7 @@ import ConversationElement from './ConversationElement'
 const ListConversations = () => {
     const [listConversations, setListConversations] = useState()
     // const { id } = useParams()
-    const { socket } = useAuth()
+    const { socket, userOnlines } = useAuth()
     const user = localStorage.getItem('user_id')
     useEffect(() => {
         const fetchListConversations = async () => {
@@ -34,10 +34,15 @@ const ListConversations = () => {
         socket &&
             socket.on(NEW_CONVERSATION, (data) => {
                 const { _id } = data
-                socket.emit(RECEIVED, {
-                    conversationId: _id,
-                    userId: data.last_message.sender,
-                })
+                const userId = localStorage.getItem('user_id')
+                const senderId = data.last_message.sender
+                senderId !== userId &&
+                    _id !== sessionStorage.getItem('conversationId') &&
+                    socket.emit(RECEIVED, {
+                        conversationId: _id,
+                        receiverId: senderId,
+                        userId,
+                    })
                 setListConversations((x) => [
                     data,
                     ...x.filter((y) => {
@@ -56,6 +61,7 @@ const ListConversations = () => {
         socket &&
             socket.on(ISREAD, (data) => {
                 // setListConversations([])
+                // console.log(`isread`, data)
                 isSubscribed &&
                     setListConversations((x) => {
                         const i = x.find((e) => {
@@ -63,7 +69,12 @@ const ListConversations = () => {
                             return eId === data?.conversationId
                         })
                         // if (i !== -1) x[i].last_message.is_read = 2
-                        i.last_message.is_read = 2
+                        // if (data.userId !== localStorage.getItem('user_id')) {
+                        // }
+                        // i.last_message.sender = data.userId
+                        // console.log(`i.last_message`, i.last_message)
+                        data.userId !== i.last_message.sender &&
+                            (i.last_message.is_read = 2)
                         return [...x]
                     })
             })
@@ -77,6 +88,7 @@ const ListConversations = () => {
         let isSubscribed = true
         socket &&
             socket.on(RECEIVED, (data) => {
+                // console.log(`receive`, data)
                 isSubscribed &&
                     setListConversations((x) => {
                         const i = x.find((e) => {
@@ -103,11 +115,13 @@ const ListConversations = () => {
                         return xId !== user
                     })
                     const tempMember = conversation.members[0]
+                    const { _id: memberId } = tempMember
                     const conversationName =
                         tempMember.username || tempMember.email
                     const { _id: conversationId } = tempMember
                     return (
                         <ConversationElement
+                            isOnline={userOnlines?.includes(memberId)}
                             members={tempMember}
                             conversation={conversation}
                             conversationId={conversationId}

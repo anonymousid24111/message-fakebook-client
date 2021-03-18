@@ -1,18 +1,28 @@
 import React, { useContext, createContext, useState, useEffect } from 'react'
 import io from 'socket.io-client'
 import PropTypes from 'prop-types'
-import { JOIN } from '../commons/socketEvents'
+import { JOIN, USER_ONLINE } from '../commons/socketEvents'
 import { API_URL } from '../commons/constants'
 
 const authContext = createContext()
 
 function useProvideAuth() {
     const [user, setUser] = useState(localStorage.getItem('user_id'))
+    const [userOnlines, setUserOnlines] = useState()
     const [socket, setSocket] = useState()
     useEffect(() => {
-        if (user && socket) socket.emit(JOIN, { userId: user })
+        if (user && socket) {
+            socket.emit(JOIN, { userId: user })
+            socket.emit(USER_ONLINE, { userId: user })
+            socket.on(USER_ONLINE, (data) => {
+                setUserOnlines(data)
+            })
+        }
         return () => {
-            if (socket) socket.disconnect()
+            if (socket) {
+                socket.off(USER_ONLINE)
+                socket.disconnect()
+            }
         }
     }, [user, socket])
 
@@ -24,6 +34,7 @@ function useProvideAuth() {
         user,
         setUser,
         socket,
+        userOnlines,
     }
 }
 

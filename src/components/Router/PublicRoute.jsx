@@ -13,11 +13,16 @@ const PublicRoute = ({ component: Component, restricted, exact, path }) => (
     />
 )
 
+PublicRoute.defaultProps = {
+    exact: false,
+    restricted: false,
+}
+
 PublicRoute.propTypes = {
-    component: PropTypes.node.isRequired,
-    restricted: PropTypes.bool.isRequired,
+    component: PropTypes.func.isRequired,
+    restricted: PropTypes.bool,
     path: PropTypes.string.isRequired,
-    exact: PropTypes.bool.isRequired,
+    exact: PropTypes.bool,
 }
 
 export default PublicRoute

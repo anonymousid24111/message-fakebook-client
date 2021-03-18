@@ -15,6 +15,7 @@ import { useAuth, ProvideAuth } from 'hooks/useAuth'
 import classNames from 'classnames'
 import PrivateRoute from 'components/Router/PrivateRoute'
 import PublicRoute from 'components/Router/PublicRoute'
+import handleDisconnectInternet from 'NetworkDetector'
 
 function AppIml() {
     const { user } = useAuth()
@@ -57,10 +58,12 @@ function AppIml() {
     )
 }
 
-export default function App() {
+function App() {
     return (
         <ProvideAuth>
             <AppIml />
         </ProvideAuth>
     )
 }
+
+export default handleDisconnectInternet(App)

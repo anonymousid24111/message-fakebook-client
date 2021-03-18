@@ -8,6 +8,7 @@ import ReceivedStatus from 'pages/Message/Main/Body/ReceivedStatus'
 import PropTypes from 'prop-types'
 
 const ConversationElement = ({
+    isOnline,
     members = {},
     conversation = {},
     conversationName = '',
@@ -63,7 +64,7 @@ const ConversationElement = ({
     const renderStatusFirstMessage = () => {
         if (
             firstMessage.sender !== localStorage.getItem('user_id') &&
-            firstMessage.is_read === 0
+            firstMessage.is_read !== 2
         ) {
             return (
                 <span className="w-4 h-4 bg-blue-500 rounded-full flex-shrink-0" />
@@ -105,7 +106,7 @@ const ConversationElement = ({
             >
                 <div className="flex-none w-16 h-16 relative">
                     <AvatarBlock16 src={members?.avatar} />
-                    {conversation?.status || (
+                    {isOnline && (
                         <span className="absolute bottom-0 right-0 bg-green-500 rounded-full w-4 h-4 border-4 border-current" />
                     )}
                 </div>
@@ -132,8 +133,12 @@ const ConversationElement = ({
         </NavLink>
     )
 }
+ConversationElement.defaultProps = {
+    isOnline: false,
+}
 
 ConversationElement.propTypes = {
+    isOnline: PropTypes.bool,
     members: PropTypes.objectOf(PropTypes.any).isRequired,
     conversation: PropTypes.objectOf(PropTypes.any).isRequired,
     conversationName: PropTypes.string.isRequired,
