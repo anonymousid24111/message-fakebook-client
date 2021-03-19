@@ -123,21 +123,21 @@ function useProvideMain() {
             isSubscribed = false
         }
     }, [id])
-
+    const { _id, members } = conversation || {}
     useEffect(() => {
-        if (!conversation) return null
-        const { _id } = conversation
-        if (!_id) return null
+        //     if (!conversation) return null
+        //     const { _id } = conversation
+        if (!_id || !members) return null
         socket.emit(JOIN, {
             conversationId: _id,
             userId: localStorage.getItem('user_id'),
-            members: conversation?.members,
+            members,
         })
         socket.on(RECEIVE_MESSAGE, (data) => {
             // console.log(`data`, data)
             socket.emit(ISREAD, {
                 conversationId: _id,
-                members: conversation.members,
+                members,
                 userId: localStorage.getItem('user_id'),
                 receiverId: data.sender,
             })
@@ -151,9 +151,9 @@ function useProvideMain() {
                 socket.off(RECEIVE_MESSAGE)
                 socket.off(TYPING)
             }
-            if (id && socket) socket.emit(OUT_ROOM, _id)
+            if (socket) socket.emit(OUT_ROOM, _id)
         }
-    }, [socket, conversation, id])
+    }, [socket, _id, members])
 
     return {
         show,

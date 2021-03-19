@@ -13,6 +13,7 @@ const MessageBlock = ({
     prev,
     next,
     userInfo = {},
+    isShowStatus,
 }) => {
     const renderMessage = () => {
         const { kind } = message
@@ -116,7 +117,7 @@ const MessageBlock = ({
             return <ReceivedStatus />
         }
         if (message.status === 'read') {
-            return <AvatarBlock16 className="w-4 h-4" />
+            return <AvatarBlock16 src={userInfo?.avatar} className="w-4 h-4" />
         }
         if (message.status === 'error') {
             return <SentStatus />
@@ -138,7 +139,9 @@ const MessageBlock = ({
                     )}
                 </div>
             ) : (
-                <div className="w-4 flex items-end">{renderLastMessage()}</div>
+                <div className="w-4 flex items-end">
+                    {isShowStatus && renderLastMessage()}
+                </div>
             )}
             {renderMessage()}
         </div>
@@ -151,6 +154,7 @@ MessageBlock.propTypes = {
     prev: PropTypes.number.isRequired,
     next: PropTypes.number.isRequired,
     userInfo: PropTypes.objectOf(PropTypes.any).isRequired,
+    isShowStatus: PropTypes.bool.isRequired,
 }
 
 export default MessageBlock

@@ -9,6 +9,14 @@ import { useMain } from '../hooks'
 const Body = () => {
     const { user } = useAuth()
     const { conversation, userInfo, typing } = useMain()
+    const lastIndexOf = (array, key) => {
+        for (let i = array.length - 1; i >= 0; i -= 1) {
+            if (array[i].sender !== key) return i
+        }
+        return -1
+    }
+
+    const indexLastMessage = lastIndexOf(conversation?.messages || [], user)
     return (
         <div>
             {conversation?.messages?.length > 0 ? (
@@ -38,6 +46,7 @@ const Body = () => {
                                 userInfo={userInfo}
                                 prev={prev}
                                 next={next}
+                                isShowStatus={index >= indexLastMessage}
                             />
                         </div>
                     )

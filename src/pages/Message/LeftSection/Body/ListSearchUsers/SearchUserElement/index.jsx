@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import logo from 'assets/images/avatar.jpg'
 import PropTypes from 'prop-types'
+import AvatarBlock16 from 'components/AvatarBlock16'
 
 const SearchUserElement = ({
     _id,
@@ -14,11 +15,7 @@ const SearchUserElement = ({
     <Link to={`/message/t/${_id || ''}`}>
         <div className="hover:bg-gray-500 flex items-center no-underline p-1 items-center rounded-xl">
             <div className="flex-none w-9 h-9 relative">
-                <img
-                    src={avatar || logo}
-                    alt="avatar-friend"
-                    className="rounded-full"
-                />
+                <AvatarBlock16 src={avatar} className="w-9 h-9" />
                 {status || (
                     <span className="absolute bottom-0 right-0 bg-green-500 rounded-full w-2 h-2 border-2 border-current" />
                 )}

@@ -49,7 +49,7 @@ function NavBar() {
                     <FriendIconFacebook />
                 </NavLink>
             </div>
-            <div className="flex flex-row items-center space-x-2">
+            <div className="flex flex-row items-center space-x-2 flex-shrink-0">
                 <NavLink
                     to="/profile"
                     activeClassName="text-blue-500 fb-bg-main-2"
@@ -70,12 +70,12 @@ function NavBar() {
                 </NavLink>
                 <button
                     type="button"
-                    className="relative w-10 h-10 rounded-full bg-gray-500 text-center flex items-center justify-center focus:outline-none mr-4"
+                    className="relative w-10 h-10 rounded-full fb-bg-dark-2 text-center flex items-center justify-center focus:outline-none mr-4"
                     onClick={() => setShowDropdown((x) => !x)}
                 >
                     <DropIcon />
                     {showDropdown && (
-                        <div className="absolute top-full right-0 w-56 bg-gray-400">
+                        <div className="absolute top-full right-0 w-56 fb-bg-dark-2 p-4 rounded-lg">
                             <LogoutButton />
                         </div>
                     )}

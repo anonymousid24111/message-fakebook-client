@@ -9,13 +9,15 @@ import { useMain } from '../hooks'
 
 const Header = () => {
     const { setShow, userInfo } = useMain()
-
+    const { _id: userId } = userInfo
     function renderRedirect() {
         if (userInfo) {
             return null
         }
         return <Redirect to="/message/t" />
     }
+
+    const handleClickCall = () => {}
 
     return (
         <>
@@ -27,8 +29,23 @@ const Header = () => {
                 </div>
                 <div className="conversation-block-content__body">status</div>
             </div>
-            <IoCall className="w-7 h-7 rounded-full p-1 hover:bg-gray-600 bg-gray-700 text-blue-500" />
-            <FaVideo className="w-7 h-7 rounded-full p-1 hover:bg-gray-600 bg-gray-700 text-blue-500" />
+            <a
+                href={`https://videocall2411.herokuapp.com/videocall/${userId}`}
+                target="_blank"
+                rel="noreferrer"
+            >
+                <IoCall
+                    className="w-7 h-7 rounded-full p-1 hover:bg-gray-600 bg-gray-700 text-blue-500"
+                    onClick={() => handleClickCall()}
+                />
+            </a>
+            <a
+                href={`https://videocall2411.herokuapp.com/videocall/${userId}`}
+                target="_blank"
+                rel="noreferrer"
+            >
+                <FaVideo className="w-7 h-7 rounded-full p-1 hover:bg-gray-600 bg-gray-700 text-blue-500" />
+            </a>
             <IoMdInformationCircle
                 className="w-7 h-7 rounded-full p-1 hover:bg-gray-600 bg-gray-700 text-blue-500"
                 onClick={() => setShow((x) => !x)}

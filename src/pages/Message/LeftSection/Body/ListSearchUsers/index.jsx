@@ -9,8 +9,25 @@ const ListSearchUsers = () => {
         <div className="w-96 h-full absolute top-0 left-0 bg-black p-2">
             {listUsers?.length > 0 ? (
                 listUsers.map((user) => {
-                    const { _id } = user
-                    return <SearchUserElement key={_id} user={user} />
+                    const {
+                        _id,
+                        avatar,
+                        email,
+                        is_friend: isFriend,
+                        username,
+                        status,
+                    } = user
+                    return (
+                        <SearchUserElement
+                            key={_id}
+                            _id={_id}
+                            avatar={avatar}
+                            email={email}
+                            is_friend={isFriend}
+                            username={username}
+                            status={status}
+                        />
+                    )
                 })
             ) : (
                 <div className="loader" />
