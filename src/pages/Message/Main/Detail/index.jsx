@@ -27,7 +27,7 @@ const Detail = () => {
                     'conversationId'
                 )}`,
             })
-            console.log(`data`, data)
+            // console.log(`data`, data)
             if (data?.code === 1000) {
                 setMedias(data.data)
             } else {
