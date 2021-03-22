@@ -18,6 +18,10 @@
     background-color: #3a3b3c;
 }
 
+.fb-bg-msg {
+    background-color: #3e4042;
+}
+
 .fb-bg-main {
     background-color: #2d88ff;
 }
@@ -45,6 +49,34 @@
 .link-active {
     display: none;
 }
+
+.fb-cl-msg {
+    color: #b0b3b8;
+}
+
+.fb-bg-bt {
+    background-color: #1877f2;
+}
+
+.fb-bg-bt:hover {
+    background-color: #1470e9;
+}
+
+.fb-bg-green {
+    background-color: #42b72a;
+}
+
+.fb-bg-green:hover {
+    background-color: #32a71a;
+}
+
+.fb-bg-active-conversation {
+    background-color: #252f3c;
+}
+.fb-bg-active-conversation:hover {
+    background-color: #252f3c;
+}
+
 #wave {
     display: inline;
     padding: 5px 10px;
@@ -89,19 +121,6 @@ body {
     border-top: solid 1px var(--background-items);
 }
 
-.conversation-block {
-    text-decoration: none !important;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    border-radius: 5px;
-    background-color: inherit;
-}
-
-.conversation-block:hover {
-    background-color: var(--background-items);
-}
-
 .my-message {
     background-color: var(--background-main);
     align-self: flex-end;
@@ -122,10 +141,6 @@ body {
 
 .list-conversation::-webkit-scrollbar-thumb:hover {
     background: #555;
-}
-
-.pl-5rem {
-    padding-left: 5rem;
 }
 
 .bg-active {

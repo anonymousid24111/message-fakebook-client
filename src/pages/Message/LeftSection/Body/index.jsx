@@ -1,4 +1,5 @@
 // import callApiHttp from 'functions/callApiHttp';
+import LeftArrow from 'components/UI/LeftArrow'
 import React, { useEffect, useRef, useState } from 'react'
 import { ProvideBody, useBody } from './hooks'
 
@@ -41,13 +42,22 @@ const BodyImpl = () => {
 
     return (
         <>
-            <div className="p-4">
+            <div className="p-2 mt-1 mb-3 flex items-center space-x-1">
+                {searching && (
+                    <button
+                        type="button"
+                        className="rounded-full focus:outline-none fb-hover-bg-dark w-9 h-9 p-1"
+                        onClick={() => setSearching(false)}
+                    >
+                        <LeftArrow />
+                    </button>
+                )}
                 <input
                     ref={refInput}
                     type="text"
                     value={keyword}
                     onChange={(e) => handleSearchKeywordChange(e)}
-                    className="w-full rounded-full focus: outline-none bg-gray-600 p-2 "
+                    className="flex-grow h-9 rounded-full focus: outline-none fb-bg-dark-2 p-2 px-3"
                     placeholder="Search Message"
                     onFocus={() => setSearching(true)}
                 />

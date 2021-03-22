@@ -40,7 +40,8 @@ function useProvideMain() {
     const [typing, setTyping] = useState(false)
     const [changing, setChanging] = useState(false)
     const handleTypingHook = (flag) => {
-        const { _id } = conversation
+        const { _id } = conversation || {}
+        if (!_id) return
         socket &&
             socket.emit(TYPING, {
                 sender: user,
@@ -52,7 +53,7 @@ function useProvideMain() {
 
     const handleSubmitSendMessage = (e, kind = 'text') => {
         const now = new Date().toISOString()
-        const { _id } = conversation
+        const { _id } = conversation || {}
         socket.emit(SEND_MESSAGE, {
             sender: user,
             receiver: id,

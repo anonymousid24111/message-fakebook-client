@@ -55,8 +55,8 @@ function Signup() {
                 </label>
                 <div className="flex justify-end">
                     <button
-                        type="button"
-                        className="fb-bg-main px-3 py-2 rounded-full"
+                        type="submit"
+                        className="fb-bg-main px-3 py-2 rounded-full focus:outline-none"
                     >
                         Sign up
                     </button>

@@ -67,7 +67,7 @@ const Login = () => {
                     />
                     <button
                         type="submit"
-                        className="fb-bg-main p-3 text-white text-2xl font-semibold rounded-md w-96"
+                        className="fb-bg-bt focus:outline-none p-3 text-white text-2xl font-semibold rounded-md w-96"
                     >
                         Log in
                     </button>
@@ -78,7 +78,7 @@ const Login = () => {
                     <div className="flex justify-center">
                         <NavLink
                             to="/signup"
-                            className="bg-green-500 text-white p-3 rounded-md text-xl font-semiblod"
+                            className="fb-bg-green text-white p-3 rounded-md text-xl font-semiblod"
                         >
                             Create New Account
                         </NavLink>

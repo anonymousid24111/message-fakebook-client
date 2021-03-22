@@ -55,7 +55,10 @@ function NavBar() {
                     activeClassName="text-blue-500 fb-bg-main-2"
                     className="p-1 rounded-full flex flex-row items-center fb-hover-bg-dark text-white"
                 >
-                    <AvatarBlock16 className="w-7 h-7 mr-1" />
+                    <AvatarBlock16
+                        src={userInfo?.avatar}
+                        className="w-7 h-7 mr-1"
+                    />
                     <span className="mr-1 font-semibold">
                         {userInfo?.username || 'username null'}
                     </span>

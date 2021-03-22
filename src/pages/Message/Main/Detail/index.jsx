@@ -46,48 +46,90 @@ const Detail = () => {
                     src={userInfo?.avatar}
                     className="w-20 h-20 my-4"
                 />
-                <div className="font-semibold text-lg py-3">
+                <div className="font-semibold text-lg pb-3">
                     {userInfo?.userInfoname || userInfo?.email || 'null'}
                 </div>
                 <button
                     type="button"
-                    className="p-3 w-full rounded-lg hover:bg-gray-600 cursor-pointer focus:outline-none text-left"
+                    className="p-3 flex justify-between w-full rounded-lg fb-hover-bg-dark cursor-pointer focus:outline-none text-left font-semibold"
                     onClick={() => setShowOptions((x) => !x)}
                 >
                     Customize chat
+                    {showOptions ? (
+                        <svg height="25" width="25" className="inline">
+                            <polyline
+                                points="7,15 12.5,10 18,15"
+                                fill="none"
+                                stroke="#a3a6aa"
+                                strokeWidth="3px"
+                            />
+                            Sorry, your browser does not support inline SVG.
+                        </svg>
+                    ) : (
+                        <svg height="25" width="25">
+                            <polyline
+                                points="7,10 12.5,15 18,10"
+                                fill="none"
+                                stroke="#a3a6aa"
+                                strokeWidth="3px"
+                            />
+                            Sorry, your browser does not support inline SVG.
+                        </svg>
+                    )}
                 </button>
                 {showOptions && (
                     <div className="w-full">
-                        <div className="w-full p-3 rounded-lg hover:bg-gray-600 flex flex-row cursor-pointer">
+                        <div className="w-full p-3 rounded-lg fb-hover-bg-dark flex flex-row cursor-pointer">
                             <FaDotCircle className="w-5 h-5 fb-cl-main" />
                             <span className="px-2">Cus 1</span>
                         </div>
-                        <div className="w-full p-3 rounded-lg hover:bg-gray-600 flex flex-row cursor-pointer">
+                        <div className="w-full p-3 rounded-lg fb-hover-bg-dark flex flex-row cursor-pointer">
                             <div className="w-5 h-5 fb-cl-main">
                                 <LikeFacebook />
                             </div>
                             <span className="px-2">Cus 2</span>
                         </div>
-                        <div className="w-full p-3 rounded-lg hover:bg-gray-600 flex flex-row cursor-pointer">
+                        <div className="w-full p-3 rounded-lg fb-hover-bg-dark flex flex-row cursor-pointer">
                             <RiEdit2Fill className="w-5 h-5 fb-cl-main" />
                             <span className="px-2">Cus 3</span>
                         </div>
                     </div>
                 )}
 
-                <div className="p-3 w-full rounded-lg hover:bg-gray-600 cursor-pointer">
+                <div className="p-3 w-full rounded-lg fb-hover-bg-dark cursor-pointer font-semibold">
                     Privacy & support
                 </div>
                 <button
                     type="button"
-                    className="p-3 text-left w-full rounded-lg hover:bg-gray-600 cursor-pointer"
+                    className="p-3 text-left w-full flex justify-between rounded-lg fb-hover-bg-dark focus:outline-none font-semibold "
                     onClick={() => handleShowMedias()}
                 >
                     Shared Media
+                    {showMedias ? (
+                        <svg height="25" width="25" className="inline">
+                            <polyline
+                                points="7,15 12.5,10 18,15"
+                                fill="none"
+                                stroke="#a3a6aa"
+                                strokeWidth="3px"
+                            />
+                            Sorry, your browser does not support inline SVG.
+                        </svg>
+                    ) : (
+                        <svg height="25" width="25">
+                            <polyline
+                                points="7,10 12.5,15 18,10"
+                                fill="none"
+                                stroke="#a3a6aa"
+                                strokeWidth="3px"
+                            />
+                            Sorry, your browser does not support inline SVG.
+                        </svg>
+                    )}
                 </button>
                 {showMedias && (
                     <div className="w-full">
-                        {medias?.length > 0 &&
+                        {medias?.length > 0 ? (
                             medias.map((media) => {
                                 const images = JSON.parse(media.content)
                                 return images.map((image) => (
@@ -98,7 +140,10 @@ const Detail = () => {
                                         key={image}
                                     />
                                 ))
-                            })}
+                            })
+                        ) : (
+                            <div className="text-center">No media</div>
+                        )}
                     </div>
                 )}
             </div>

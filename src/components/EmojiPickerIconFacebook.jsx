@@ -2,7 +2,7 @@ import React from 'react'
 
 const EmojiPickerIconFacebook = () => (
     <svg height="20px" width="20px" viewBox="0 0 38 38">
-        <g fill="gray" fillRule="evenodd">
+        <g fill="#0084ff" fillRule="evenodd">
             <g transform="translate(-893.000000, -701.000000)">
                 <g transform="translate(709.000000, 314.000000)">
                     <g>

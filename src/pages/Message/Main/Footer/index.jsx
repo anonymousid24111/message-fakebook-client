@@ -180,16 +180,17 @@ const Footer = (props, ref) => {
                     />
                     <button
                         type="button"
+                        className="focus:outline-none"
                         onClick={() => setShowPikerEmoji((x) => !x)}
                     >
                         <EmojiPickerIconFacebook />
+                        <GEmoji
+                            onPickEmoji={(e) => handlePickEmoji(e)}
+                            isOpen={showPikerEmoji}
+                            setOpen={(e) => setShowPikerEmoji(e)}
+                        />
                     </button>
                 </div>
-                <GEmoji
-                    onPickEmoji={(e) => handlePickEmoji(e)}
-                    isOpen={showPikerEmoji}
-                    setOpen={(e) => setShowPikerEmoji(e)}
-                />
             </form>
             {message ? (
                 <button
@@ -202,7 +203,7 @@ const Footer = (props, ref) => {
             ) : (
                 <button
                     type="submit"
-                    className="flex-shrink-0 rounded-full w-9 h-9 bg-opacity-0 cursor-pointer hover:bg-gray-600 p-1 focus:outline-none"
+                    className="flex-shrink-0 rounded-full p-2 bg-opacity-0 cursor-pointer hover:bg-gray-600 p-1 focus:outline-none"
                     form="messageForm"
                 >
                     <LikeFacebook />

@@ -10,19 +10,19 @@ import IconButton from './components/IconButton'
 const Header = () => {
     const { userInfo } = useProvideUser()
     return (
-        <div className="p-5 flex flex-row items-center space-x-2 border-b border-gray-600 hidden lg:flex">
+        <div className="p-2 flex flex-row items-center space-x-2 hidden lg:flex">
             <Link to="/">
                 <AvatarBlock16 src={userInfo?.avatar} className="w-10 h-10" />
             </Link>
-            <span className="flex-grow font-semibold text-xl">Chats</span>
+            <span className="flex-grow font-bold text-2xl">Chats</span>
             <IconButton>
-                <FiMoreHorizontal />
+                <FiMoreHorizontal size="lg" />
             </IconButton>
             <IconButton>
-                <RiVideoAddFill />
+                <RiVideoAddFill size="lg" />
             </IconButton>
             <IconButton>
-                <AiFillEdit />
+                <AiFillEdit size="lg" />
             </IconButton>
         </div>
     )

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const ListsFriendsProfile = ({ friends, handleUnfriend }) => (
     <div>
         <div>friends: </div>
-        <div className="pl-5rem">
+        <div className="pl-20">
             {friends.length > 0 ? (
                 friends.map((friend) => (
                     <div key={friend}>

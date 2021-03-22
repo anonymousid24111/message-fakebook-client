@@ -1,14 +1,13 @@
 import React from 'react'
-import { IoMdInformationCircle } from 'react-icons/io'
-import { IoCall } from 'react-icons/io5'
-import { FaVideo } from 'react-icons/fa'
-// absolute
 import { Redirect } from 'react-router-dom'
 import AvatarBlock16 from 'components/AvatarBlock16'
+import CallIconFacebook from 'components/UI/CallIconFacebook'
+import VideoIconFacebook from 'components/UI/VideoIconFacebook'
+import DetailIconFacebook from 'components/UI/DetailIconFacebook'
 import { useMain } from '../hooks'
 
 const Header = () => {
-    const { setShow, userInfo } = useMain()
+    const { setShow, userInfo, show } = useMain()
     const { _id: userId } = userInfo
     function renderRedirect() {
         if (userInfo) {
@@ -27,29 +26,32 @@ const Header = () => {
                 <div className="text-lg font-semibold">
                     {userInfo?.username || userInfo?.email || 'null'}
                 </div>
-                <div className="conversation-block-content__body">status</div>
+                <div className="text-xs">Active 40m ago</div>
             </div>
             <a
                 href={`https://videocall2411.herokuapp.com/videocall/${userId}`}
                 target="_blank"
                 rel="noreferrer"
             >
-                <IoCall
-                    className="w-7 h-7 rounded-full p-1 hover:bg-gray-600 bg-gray-700 text-blue-500"
-                    onClick={() => handleClickCall()}
-                />
+                <CallIconFacebook onClick={() => handleClickCall()} />
             </a>
             <a
                 href={`https://videocall2411.herokuapp.com/videocall/${userId}`}
                 target="_blank"
                 rel="noreferrer"
             >
-                <FaVideo className="w-7 h-7 rounded-full p-1 hover:bg-gray-600 bg-gray-700 text-blue-500" />
+                <VideoIconFacebook />
             </a>
-            <IoMdInformationCircle
-                className="w-7 h-7 rounded-full p-1 hover:bg-gray-600 bg-gray-700 text-blue-500"
+            <button
+                type="button"
+                className="focus:outline-none relative"
                 onClick={() => setShow((x) => !x)}
-            />
+            >
+                <DetailIconFacebook />
+                {show && (
+                    <div className="absolute top-0 left-0 w-full h-full border border border-4 rounded-full border-blue-500" />
+                )}
+            </button>
         </>
     )
 }

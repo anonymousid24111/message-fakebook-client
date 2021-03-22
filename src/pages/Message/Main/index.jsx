@@ -12,7 +12,7 @@ const MainImpl = () => {
     return (
         <>
             <div className="flex flex-col flex-grow h-full">
-                <div className="px-4 py-3 flex items-center border-b border-gray-600 space-x-2">
+                <div className="px-4 py-3 flex items-center border-b border-gray-700 space-x-2">
                     <Header />
                 </div>
                 <div
@@ -22,7 +22,7 @@ const MainImpl = () => {
                 >
                     <Body />
                 </div>
-                <div className="flex items-end p-3">
+                <div className="flex items-end p-3 space-x-1">
                     <Footer ref={inputRef} />
                 </div>
             </div>

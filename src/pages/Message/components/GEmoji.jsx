@@ -22,7 +22,7 @@ const GEmoji = ({ onPickEmoji, isOpen = false, setOpen }) => {
         <div
             ref={emojiRef}
             className={classnames(
-                'absolute bottom-full left-1/2 flex bg-gray-500 max-w-xs flex-wrap p-1 h-56 overflow-auto rounded-lg border',
+                'absolute bottom-full right-0 flex fb-bg-dark max-w-xs flex-wrap p-1 h-56 overflow-auto rounded-lg',
                 { hidden: !isOpen }
             )}
         >

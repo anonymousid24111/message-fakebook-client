@@ -43,7 +43,7 @@ const MessageBlock = ({
 
             return (
                 <div
-                    className={classnames('px-3 py-2 rounded-3xl bg-gray-600', {
+                    className={classnames('px-3 py-2 rounded-3xl fb-bg-msg', {
                         'my-message bg-blue-600': isMe,
                         'rounded-tl': !isMe && prev,
                         'rounded-bl': !isMe && next,
@@ -56,11 +56,7 @@ const MessageBlock = ({
             )
         }
         if (kind === 'react') {
-            return (
-                <div className="w-7 h-7">
-                    <LikeFacebook />
-                </div>
-            )
+            return <LikeFacebook className="w-8 h-8" />
         }
         if (kind === 'images') {
             const images = JSON.parse(message.content)
@@ -139,7 +135,7 @@ const MessageBlock = ({
                     )}
                 </div>
             ) : (
-                <div className="w-4 flex items-end">
+                <div className="w-4 flex items-end mx-1">
                     {isShowStatus && renderLastMessage()}
                 </div>
             )}

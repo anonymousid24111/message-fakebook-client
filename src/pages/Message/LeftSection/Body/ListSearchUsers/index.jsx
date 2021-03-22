@@ -6,7 +6,7 @@ import SearchUserElement from './SearchUserElement'
 const ListSearchUsers = () => {
     const { listUsers } = useBody()
     return (
-        <div className="w-96 h-full absolute top-0 left-0 bg-black p-2">
+        <div className="w-96 h-full absolute top-0 left-0 fb-bg-dark p-1 border-r border-gray-600">
             {listUsers?.length > 0 ? (
                 listUsers.map((user) => {
                     const {
