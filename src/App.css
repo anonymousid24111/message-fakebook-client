@@ -26,14 +26,14 @@
     background-color: #2d88ff;
 }
 
-.fb-bg-main {
+/* .fb-bg-main:hover {
     background-color: #2d88ff33;
-}
+} */
 
 .fb-cl-main {
     color: #2d88ff;
 }
-. .fb-cl-sec {
+.fb-cl-sec {
     color: var(--color-secondary);
 }
 .fb-bg-active {

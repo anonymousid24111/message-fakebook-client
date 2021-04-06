@@ -5,7 +5,7 @@ const DropdownEditCover = ({ handleChangeCover }) => (
     <div className="absolute right-0 bg-gray-700 p-2 rounded-lg">
         <label
             htmlFor="cover"
-            className="p-2 hover:bg-gray-800 w-60 rounded-lg"
+            className="p-2 hover:bg-gray-800 w-60 rounded-lg block cursor-pointer"
         >
             <input
                 id="cover"

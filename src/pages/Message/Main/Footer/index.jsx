@@ -9,10 +9,10 @@ import React, {
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { BiImageAdd } from 'react-icons/bi'
 import { useParams } from 'react-router-dom'
-import { API_URL } from 'commons/constants'
+import { REACT_APP_API_URL } from 'commons/constants'
 import axios from 'axios'
 import LikeFacebook from 'components/LikeFacebook'
-import GEmoji from 'pages/Message/components/GEmoji'
+import GEmoji from 'components/GEmoji'
 import AddIconFacebook from 'components/AddIconFacebook'
 import ImagePickerIconFacebook from 'components/ImagePickerIconFacebook'
 import StickerFacebook from 'components/StickerFacebook'
@@ -20,7 +20,7 @@ import GifIconFacebook from 'components/GifIconFacebook'
 import EmojiPickerIconFacebook from 'components/EmojiPickerIconFacebook'
 import SendIconFacebook from 'components/SendIconFacebook'
 import classNames from 'classnames'
-import { useMain } from '../hooks'
+import { useMain } from '../contexts'
 
 const Footer = (props, ref) => {
     const { id } = useParams()
@@ -66,7 +66,7 @@ const Footer = (props, ref) => {
             }
             const { data } = await axios({
                 method: 'post',
-                url: `${API_URL}upload/images`,
+                url: `${REACT_APP_API_URL}upload/images`,
                 data: formData,
                 headers: {
                     'Content-Type': 'multipart/form-data',

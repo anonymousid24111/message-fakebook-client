@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import AvatarBlock16 from 'components/AvatarBlock16'
 import Title from '../components/Title'
 import { useProvideFriend } from '../hooks/useFriend'
-import AvatarBlock from '../components/AvatarBlock'
 
 const MyRequestFriends = ({ users = [] }) => {
     const { handleCancelRequest } = useProvideFriend()
@@ -18,7 +18,10 @@ const MyRequestFriends = ({ users = [] }) => {
                         return (
                             <Link to={`/friend/${_id}`} key={_id}>
                                 <div className="flex flex-row p-2 rounded-lg fb-hover-bg-dark">
-                                    <AvatarBlock src={avatar} />
+                                    <AvatarBlock16
+                                        className="w-16 h-16"
+                                        src={avatar}
+                                    />
                                     <div className="px-4 flex-grow">
                                         <div className="text-lg">
                                             {username || email || 'null'}

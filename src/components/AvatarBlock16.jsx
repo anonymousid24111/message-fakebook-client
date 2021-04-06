@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from 'assets/images/avatar.jpg'
+import logo from 'assets/images/avatar.png'
 import PropTypes from 'prop-types'
 
 const AvatarBlock16 = ({ src, className }) => (

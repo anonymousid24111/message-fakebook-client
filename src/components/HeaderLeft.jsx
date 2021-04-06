@@ -1,5 +1,5 @@
 // import React from 'react'
-// import logo from '../assets/images/avatar.jpg'
+// import logo from '../assets/images/avatar.png'
 // import { FiMoreHorizontal } from 'react-icons/fi'
 // import { RiVideoAddFill } from 'react-icons/ri'
 // import { AiFillEdit } from 'react-icons/ai'

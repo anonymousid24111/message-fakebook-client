@@ -73,7 +73,9 @@ const Login = () => {
                     </button>
                     <hr />
                     <div className="text-blue-500 text-sm text-center">
-                        <Link>Forgotten password?</Link>
+                        <Link to="/forgotten_password">
+                            Forgotten password?
+                        </Link>
                     </div>
                     <div className="flex justify-center">
                         <NavLink

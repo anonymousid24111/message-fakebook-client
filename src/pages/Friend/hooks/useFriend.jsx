@@ -58,7 +58,7 @@ function useProvideFriend() {
                 method: 'POST',
                 url: '/friend/set_accept_request_friend',
                 data: {
-                    userId,
+                    user_id: userId,
                     is_accept: type,
                 },
             })
@@ -78,7 +78,7 @@ function useProvideFriend() {
                 method: 'POST',
                 url: '/friend/cancel_request_friend',
                 data: {
-                    userId,
+                    user_id: userId,
                 },
             })
             const { data } = res
@@ -92,13 +92,13 @@ function useProvideFriend() {
         }
     }
 
-    const handleAddFriend = async (userId) => {
+    const handleAddFriend = async (_id, flag) => {
         try {
             const res = await callApiHttp({
                 method: 'POST',
                 url: '/friend/send_request_friend',
                 data: {
-                    userId,
+                    user_id: _id,
                 },
             })
             const { data } = res

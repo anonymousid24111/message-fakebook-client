@@ -1,4 +1,4 @@
-import React, { useContext, createContext, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 import { useParams } from 'react-router-dom'
 
@@ -13,21 +13,6 @@ import {
 import { useAuth } from 'hooks/useAuth'
 
 import callApiHttp from 'functions/callApiHttp'
-import PropTypes from 'prop-types'
-
-const mainContext = createContext()
-
-function ProvideMain({ children }) {
-    const main = useProvideMain()
-    return <mainContext.Provider value={main}>{children}</mainContext.Provider>
-}
-ProvideMain.propTypes = {
-    children: PropTypes.node.isRequired,
-}
-
-function useMain() {
-    return useContext(mainContext)
-}
 
 function useProvideMain() {
     const [show, setShow] = useState(false)
@@ -172,4 +157,4 @@ function useProvideMain() {
     }
 }
 
-export { ProvideMain, useMain, useProvideMain }
+export default useProvideMain

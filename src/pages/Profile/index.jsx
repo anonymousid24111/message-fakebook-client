@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ProvideUser } from 'hooks/useUser'
-import logo from 'assets/images/avatar.jpg'
+import logo from 'assets/images/avatar.png'
 import { IoIosCamera } from 'react-icons/io'
 
 import useHookProfile from './hooks'
@@ -22,13 +22,21 @@ const ProfileImpl = () => {
         handleChangeAvatar,
         handleUnfriend,
         handleSubmitInfo,
+        loadingCover,
+        // setLoadingCover,
     } = useHookProfile()
     const [showOptionsEditCover, setShowOptionsEditCover] = useState(false)
 
     return (
-        <div className="w-full min-h-full flex flex-col bg-gray-900 ">
-            <div className="h-96 relative pb-4 box-content flex flex-row justify-center">
+        <div className="w-full min-h-full flex flex-col fb-bg-dark">
+            <div className="h-96 relative pb-4 box-content flex flex-row justify-center fb-bg-dark-2">
                 <div className="relative" style={{ width: '940px' }}>
+                    {loadingCover && (
+                        <>
+                            <div className="absolute top-0 left-0 bg-black w-full h-full bg-opacity-75" />
+                            <div className="loader bg-black w-full" />
+                        </>
+                    )}
                     <img
                         src={userInfo?.cover_image || logo}
                         className="rounded-lg h-96 object-cover"
@@ -61,12 +69,13 @@ const ProfileImpl = () => {
                     />
 
                     <IoIosCamera
-                        className="w-7 h-7 absolute bottom-0 right-0 m-2 bg-gray-900 p-1 rounded-full"
-                        onClick={() => setModal(true)}
+                        className="w-7 h-7 absolute bottom-0 right-0 m-2 bg-gray-900 p-1 rounded-full cursor-pointer"
+                        onClick={() => setModal((x) => !x)}
                     />
                     {modal && (
                         <ModalEditAvatar
                             modalRef={modalRef}
+                            setModal={setModal}
                             previewAvatar={previewAvatar}
                             handleChangeAvatar={handleChangeAvatar}
                             handleSubmitAvatar={handleSubmitAvatar}

@@ -24,12 +24,40 @@ function Signup() {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     return (
-        <div className="w-screen h-screen flex items-center justify-center bg-black">
+        <div className="w-screen h-screen flex items-center justify-center bg-gray-200">
             <form
                 onSubmit={signup}
-                className="w-96 fb-bg-dark rounded-xl p-7 space-y-3"
+                className="w-96 text-black bg-gray-100 rounded-lg p-7 space-y-3"
+                style={{ width: '400px' }}
             >
-                <label htmlFor="email">
+                <div className="flex font-semibold text-3xl"> Đăng ký</div>
+                <div>Nhanh chóng và dễ dàng.</div>
+                <hr />
+                <div className="flex justify-center space-x-2">
+                    <input
+                        className="inline min-w-0 p-2 rounded border boder-black-300"
+                        placeholder="First name"
+                    />
+                    <input
+                        className="inline min-w-0 p-2 rounded border boder-black-300"
+                        placeholder="Last name"
+                    />
+                </div>
+                <input
+                    className="p-2 w-full rounded border boder-black-300"
+                    placeholder="Email address or phone number"
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                    className="p-2 w-full rounded border boder-black-300"
+                    placeholder="New password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                {/* <label htmlFor="email">
                     <div className="font-bold text-lg ">Email:</div>
                     <input
                         id="email"
@@ -52,11 +80,11 @@ function Signup() {
                         onChange={(e) => setPassword(e.target.value)}
                         placeholde="password"
                     />
-                </label>
-                <div className="flex justify-end">
+                </label> */}
+                <div className="flex justify-center">
                     <button
                         type="submit"
-                        className="fb-bg-main px-3 py-2 rounded-full focus:outline-none"
+                        className=" fb-bg-green text-white px-14 py-2 text-xl rounded focus:outline-none "
                     >
                         Sign up
                     </button>

@@ -20,23 +20,23 @@ function NavBar() {
                 <LogoFacebook />
                 <input
                     type="search"
-                    className="rounded-full focus:outline-none p-2 fb-bg-dark-2"
+                    className="rounded-full focus:outline-none p-2 fb-bg-dark-2 w-20 md:w-full"
                     placeholder="Search doing"
                 />
             </div>
-            <div className="flex-grow flex flex-row ml-56">
+            <div className="flex-grow flex flex-row ml-0 md:ml-56">
                 <NavLink
                     to="/"
                     exact
                     activeClassName="fb-bg-active"
-                    className="fb-hover-bg-dark w-40 rounded-lg flex justify-center h-14 items-center text-white"
+                    className="fb-hover-bg-dark md:w-40 w-28 rounded-lg flex justify-center h-14 items-center text-white"
                 >
                     <HomeIconFacebook />
                 </NavLink>
                 <NavLink
                     to="/watch"
                     activeClassName="fb-bg-active"
-                    className="fb-hover-bg-dark w-40 rounded-lg flex justify-center h-14 items-center text-white"
+                    className="fb-hover-bg-dark md:w-40 w-28 rounded-lg flex justify-center h-14 items-center text-white"
                 >
                     <WatchIconFacebook />
                 </NavLink>
@@ -44,7 +44,7 @@ function NavBar() {
                 <NavLink
                     to="/friend"
                     activeClassName="fb-bg-active"
-                    className=" fb-hover-bg-dark w-40 rounded-lg flex justify-center h-14 items-center text-white"
+                    className=" fb-hover-bg-dark md:w-40 w-28 rounded-lg flex justify-center h-14 items-center text-white"
                 >
                     <FriendIconFacebook />
                 </NavLink>
@@ -77,12 +77,12 @@ function NavBar() {
                     onClick={() => setShowDropdown((x) => !x)}
                 >
                     <DropIcon />
-                    {showDropdown && (
-                        <div className="absolute top-full right-0 w-56 fb-bg-dark-2 p-4 rounded-lg">
-                            <LogoutButton />
-                        </div>
-                    )}
                 </button>
+                {showDropdown && (
+                    <div className="absolute top-full right-0 w-56 fb-bg-dark-2 p-4 rounded-lg">
+                        <LogoutButton />
+                    </div>
+                )}
             </div>
 
             {/* {routes.map((route) => (

@@ -4,7 +4,7 @@ import MessageBlock from 'components/MessageBlock'
 import MessageTime from 'components/MessageTime'
 import AvatarBlock16 from 'components/AvatarBlock16'
 import { useAuth } from 'hooks/useAuth'
-import { useMain } from '../hooks'
+import { useMain } from '../contexts'
 
 const Body = () => {
     const { user } = useAuth()

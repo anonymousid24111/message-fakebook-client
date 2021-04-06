@@ -8,6 +8,7 @@ const useHookProfile = () => {
     const modalRef = useRef(null)
 
     const [modal, setModal] = useState()
+    const [loadingCover, setLoadingCover] = useState(false)
 
     const [avatar, setAvatar] = useState()
     const [previewAvatar, setPreviewAvatar] = useState()
@@ -23,6 +24,7 @@ const useHookProfile = () => {
     }
 
     const handleChangeCover = async (e) => {
+        setLoadingCover(true)
         e.preventDefault()
         const file = e.target.files[0]
         const formData = new FormData()
@@ -36,6 +38,9 @@ const useHookProfile = () => {
             // alert('upload thanh cong')
             // setModal(false)
             // setAvatar(null)
+            setTimeout(() => {
+                setLoadingCover(false)
+            }, 500)
         } else {
             // alert('upload fail')
         }
@@ -99,6 +104,7 @@ const useHookProfile = () => {
             })
             if (data.code === 1000) {
                 // alert('success')
+                // ToastError('THanh cong')
             } else {
                 // alert('failed')
             }
@@ -118,6 +124,8 @@ const useHookProfile = () => {
         handleChangeAvatar,
         handleUnfriend,
         handleSubmitInfo,
+        loadingCover,
+        setLoadingCover,
     }
 }
 

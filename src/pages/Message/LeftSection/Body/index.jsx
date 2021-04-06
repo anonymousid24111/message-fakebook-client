@@ -1,10 +1,11 @@
 // import callApiHttp from 'functions/callApiHttp';
+import classNames from 'classnames'
 import LeftArrow from 'components/UI/LeftArrow'
 import React, { useEffect, useRef, useState } from 'react'
 import { ProvideBody, useBody } from './hooks'
 
-import ListConversations from './ListConversations'
-import ListSearchUsers from './ListSearchUsers'
+import ListConversations from './components/ListConversations'
+import ListSearchUsers from './components/ListSearchUsers'
 
 const BodyImpl = () => {
     const ref = useRef(null)
@@ -42,7 +43,7 @@ const BodyImpl = () => {
 
     return (
         <>
-            <div className="p-2 mt-1 mb-3 flex items-center space-x-1">
+            <div className="p-2 mt-1 mb-3 flex items-center space-x-1 z-10 ">
                 {searching && (
                     <button
                         type="button"
@@ -57,13 +58,18 @@ const BodyImpl = () => {
                     type="text"
                     value={keyword}
                     onChange={(e) => handleSearchKeywordChange(e)}
-                    className="flex-grow h-9 rounded-full focus: outline-none fb-bg-dark-2 p-2 px-3"
+                    className={classNames(
+                        'h-9 rounded-full focus:outline-none fb-bg-dark-2 p-2 px-3',
+                        {
+                            'w-20 md:w-full': !searching,
+                        }
+                    )}
                     placeholder="Search Message"
                     onFocus={() => setSearching(true)}
                 />
             </div>
             <div
-                className="relative z-0 h-full"
+                className="relative z-10 h-full"
                 ref={ref}
                 // onClick={() => setSearching(false)}
             >

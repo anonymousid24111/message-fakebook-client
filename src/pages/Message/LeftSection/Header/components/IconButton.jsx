@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const IconButton = ({ children }) => (
+const IconButton = ({ component }) => (
     <span className="rounded-full w-9 h-9 p-2 fb-bg-dark-2 hover:bg-gray-700">
-        {children}
+        {component}
     </span>
 )
 
 IconButton.propTypes = {
-    children: PropTypes.node.isRequired,
+    component: PropTypes.node.isRequired,
 }
 
 export default IconButton

@@ -4,7 +4,7 @@ import React, { useRef } from 'react'
 import Header from './Header'
 import Detail from './Detail'
 import Body from './Body'
-import { ProvideMain } from './hooks'
+import { ProvideMain } from './contexts'
 import Footer from './Footer'
 
 const MainImpl = () => {

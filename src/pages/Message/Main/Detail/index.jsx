@@ -5,7 +5,7 @@ import { RiEdit2Fill } from 'react-icons/ri'
 import AvatarBlock16 from 'components/AvatarBlock16'
 import LikeFacebook from 'components/LikeFacebook'
 import callApiHttp from 'functions/callApiHttp'
-import { useMain } from '../hooks'
+import { useMain } from '../contexts'
 
 const Detail = () => {
     const { show, userInfo } = useMain()

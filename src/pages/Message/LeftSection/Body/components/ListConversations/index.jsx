@@ -3,7 +3,7 @@ import callApiHttp from 'functions/callApiHttp'
 
 import { ISREAD, NEW_CONVERSATION, RECEIVED } from 'commons/socketEvents'
 import { useAuth } from 'hooks/useAuth'
-import ConversationElement from './ConversationElement'
+import ConversationElement from '../ConversationElement'
 
 const ListConversations = () => {
     const [listConversations, setListConversations] = useState()
@@ -73,7 +73,7 @@ const ListConversations = () => {
                         // }
                         // i.last_message.sender = data.userId
                         // console.log(`i.last_message`, i.last_message)
-                        data.userId !== i.last_message.sender &&
+                        data.userId !== i?.last_message.sender &&
                             (i.last_message.is_read = 2)
                         return [...x]
                     })

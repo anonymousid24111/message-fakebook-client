@@ -2,7 +2,7 @@ import React, { useContext, createContext, useState, useEffect } from 'react'
 import io from 'socket.io-client'
 import PropTypes from 'prop-types'
 import { JOIN, USER_ONLINE } from '../commons/socketEvents'
-import { API_URL } from '../commons/constants'
+import { REACT_APP_API_URL } from '../commons/constants'
 
 const authContext = createContext()
 
@@ -13,7 +13,8 @@ function useProvideAuth() {
     useEffect(() => {
         if (user && socket) {
             socket.emit(JOIN, { userId: user })
-            socket.emit(USER_ONLINE, { userId: user })
+            setInterval(()=>socket.emit(USER_ONLINE, { userId: user }), 5000)
+            
             socket.on(USER_ONLINE, (data) => {
                 setUserOnlines(data)
             })
@@ -27,7 +28,7 @@ function useProvideAuth() {
     }, [user, socket])
 
     useEffect(() => {
-        setSocket(io(API_URL))
+        setSocket(io(REACT_APP_API_URL))
     }, [])
 
     return {

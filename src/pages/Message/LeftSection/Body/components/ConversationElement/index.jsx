@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom'
 import { getTimeToNow } from 'functions/formatTime'
 import AvatarBlock16 from 'components/AvatarBlock16'
 import LikeFacebook from 'components/LikeFacebook'
-import SentStatus from 'pages/Message/Main/Body/SentStatus'
-import ReceivedStatus from 'pages/Message/Main/Body/ReceivedStatus'
+import SentStatus from 'components/icons/SentStatus'
+import ReceivedStatus from 'components/icons/ReceivedStatus'
 import PropTypes from 'prop-types'
 
 const ConversationElement = ({

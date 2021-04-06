@@ -15,15 +15,9 @@ const Header = () => {
                 <AvatarBlock16 src={userInfo?.avatar} className="w-10 h-10" />
             </Link>
             <span className="flex-grow font-bold text-2xl">Chats</span>
-            <IconButton>
-                <FiMoreHorizontal size="lg" />
-            </IconButton>
-            <IconButton>
-                <RiVideoAddFill size="lg" />
-            </IconButton>
-            <IconButton>
-                <AiFillEdit size="lg" />
-            </IconButton>
+            <IconButton component={<FiMoreHorizontal size="20" />} />
+            <IconButton component={<RiVideoAddFill size="20" />} />
+            <IconButton component={<AiFillEdit size="20" />} />
         </div>
     )
 }

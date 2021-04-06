@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useBody } from '../hooks'
+import { useBody } from '../../hooks'
 import SearchUserElement from './SearchUserElement'
 
 const ListSearchUsers = () => {
